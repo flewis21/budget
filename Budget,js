@@ -1,4 +1,0 @@
-function doGet() {
-  var html= App.doGet()
-  return App.renderTemplate(html)
-}
