@@ -401,7 +401,7 @@ var renderTemplate = function (blob, argsObject) {
     .append(html)
     .append(schedule)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-    .setTitle("Don'time Life Services");
+    .setTitle("ATL Budget Studio");
 };
 
 var appList = function (e) {
@@ -454,8 +454,10 @@ var appList = function (e) {
                 <div class="row">
                   <div class="col s10 card-panel l12 m12 push-s1">
                     <div class="z-depth-5 grey toolbar_icon toolbar_iconHover container">
+                      <div id="webSearchDiv">
                       <div class="col s12 l12 m12">
                         <input style="font-size:18pt;color:green" placeholder="research" class="timepicker flow-text menu-img z-depth-5 card-panel black scale-transition scale-out scale-in receipt btn-large" id="homeIndex"  type="search" />
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -466,19 +468,6 @@ var appList = function (e) {
         </div>
       </div>
     </nav>
-      <div class="row">
-        <div class="col s12 m12 l12 menu z-depth-5 card-panel amber scale-out scale-in" style="font-size: 30px">
-          <div class="container">
-            <div class="col s12 m12 l12 receipt nav-wrapper deep-purple darken-1">
-              <div class="agenda z-depth-5 btn-large card-panel blue scale-out scale-in receipt">
-                <span>
-                  <input placeholder="Your Search Here Ex. apple,orange..." class="flow-text menu-img z-depth-5 card-panel deep-purple darken-1 scale-transition scale-out scale-in receipt btn-large" id="uiApp" type="search"/>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <script>
 
@@ -495,62 +484,121 @@ var appList = function (e) {
                 reject(error)})
             .runBoilerplate([func], [args])})};
           
-          const htmlStructure = document.getElementById("indexDiv").innerHTML
+          const docWnd = document.getElementById("indexDiv")
+          const w3Wnd = document.getElementById("webSearchDiv")
+          const htmlStructure = docWnd.innerHTML
+          const w3Structure = w3Wnd.innerHTML
           const results = document.getElementById("homeIndex")
-          const strValue = results.value
-          if (!strValue) {
+          if (results.value)  {
+           results.addEventListener("change",(e) => 
+            {
 
-            document.getElementById("indexDiv").innerHTML = "... Loading"
-            serverside("dtlsPict")
-            .then((stream) => {
-
-              if (stream) {
-
-                document.getElementById("indexDiv").innerHTML = htmlStructure
-                document.getElementById("indexRes").src = stream
-
-              }
-              else {
-
-                document.getElementById("indexDiv").innerHTML =  JSON.stringify(er)
-
-              }
-
-            })
-            .catch((er) => {
-
-              console.log(er)
-              document.getElementById("indexDiv").innerHTML = JSON.stringify(er)
-
-            })
-
-          }
-          results.addEventListener("change",(e) => 
-          {
-
-              var cap = e.target.value
-              document.getElementById("homeIndex").value = ""
-              document.getElementById("indexDiv").innerHTML = "... waiting for " + cap
-              serverside("portBing", cap)
-              .then((vid) => {
+                var cap = e.target.value
+                if (cap) {
+                try {
 
               
-                if (vid) {
+                document.getElementById("homeIndex").value = ""
+                document.getElementById("indexDiv").innerHTML = "... waiting for " + cap
+                serverside("portBing", cap)
+                .then((vid) => {
 
+                
+                  if (vid.length === 99) {
+
+                    
+
+                        console.log(typeof vid + " with length = " + vid.length)
+                          // User clicked "No" or X in the title bar.
+                          document.getElementById("indexDiv").innerHTML = htmlStructure
+                          var linkFollow = document.createElement("a");
+                          linkFollow.href = vid
+                          linkFollow.id = "linkFOLLOW";
+                          linkFollow.target = "_child";
+                          document.body.appendChild(linkFollow);
+                        document.getElementById("linkFOLLOW").click();
+                        document.getElementById("linkFOLLOW").remove();
+                          
+
+                          }
+                    else {
+
+                          console.log(typeof vid + " with length = " + vid.length)
+                          // User clicked "No" or X in the title bar.
+                          document.getElementById("indexDiv").innerHTML = vid;
                       
-                        // User clicked "No" or X in the title bar.
-                        document.getElementById("indexDiv").innerHTML = htmlStructure
-                        document.getElementById("indexRes").src = vid;}
-                })
+                    }
+                  })
+                .catch((er) => {
+
+                
+                  console.log(er)
+                  document.getElementById("webSearchDiv").innerHTML = JSON.stringify(er)
+                  })}
+
+              catch (er) {
+
+              document.getElementById("indexDiv").innerHTML = "... Loading"
+              document.getElementById("webSearchDiv").innerHTML = JSON.stringify(er)
+              serverside("dtlsPict")
+              .then((stream) => {
+
+
+                  document.getElementById("indexDiv").innerHTML = htmlStructure
+                  // document.getElementById("webSearchDiv").innerHTML = w3Structure
+                  document.getElementById("indexRes").src = stream
+                  if (results) {
+
+                      prompt("test")
+
+                  }
+
+              })
               .catch((er) => {
 
-              
                 console.log(er)
-                document.getElementById("indexDiv").innerHTML = JSON.stringify(er)
-                })
+                document.getElementById("webSearchDiv").innerHTML = JSON.stringify(er)
 
-              
-          })}
+              })}}
+            else {
+
+              document.getElementById("indexDiv").innerHTML = "... Loading"
+              document.getElementById("webSearchDiv").innerHTML = ""
+              serverside("dtlsPict")
+              .then((stream) => {
+
+
+                  document.getElementById("indexDiv").innerHTML = htmlStructure
+                  document.getElementById("webSearchDiv").innerHTML = w3Structure
+                  document.getElementById("indexRes").src = stream
+
+              })
+              .catch((er) => {
+
+                console.log(er)
+                document.getElementById("webSearchDiv").innerHTML = JSON.stringify(er)
+
+              })}})}
+            else {
+
+              document.getElementById("indexDiv").innerHTML = "... Loading"
+              document.getElementById("webSearchDiv").innerHTML = ""
+              serverside("dtlsPict")
+              .then((stream) => {
+
+
+                  // document.getElementById("webSearchDiv").innerHTML = w3Structure
+                  document.getElementById("indexDiv").innerHTML = htmlStructure
+                  document.getElementById("indexRes").src = stream
+
+              })
+              .catch((er) => {
+
+                console.log(er)
+                document.getElementById("webSearchDiv").innerHTML = JSON.stringify(er)
+
+              })}
+}
       </script>
       <script>
         document.getElementById("uiApp").addEventListener("change", research)
