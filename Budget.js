@@ -18,10 +18,47 @@ var doGet = function (e) {
         ),
     )
   ];
-  args = e.parameter["args"] || ["jFundamentals"];
+  args = e.parameter["args"] || ["epaWebsite"];
   return renderTemplate(
-    this[libName].contentApp(
-      `          
+    `<html id="wildSageBrushDoGet">
+                <head>
+                  <base target="_self">
+                  <meta charset="utf-8">
+                  <meta name="Subscribe" content="Pro Media Snip">
+                  <meta name=viewport content="width=device-width, initial-scale=1">
+                  <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+                  <style>
+
+                      body {
+
+                        flex-grow: 1;
+                        color:blue;
+                        text-decoration:bold;
+                        flex-flow: row wrap;
+                        grid-column: 1;
+                        grid-row: 1;
+                        text-align: center;
+                        align-content: flex-start;
+                        overflow: auto;
+                      }
+                  </style>
+                </head>
+                <body>
+                  <div id="pageObj"></div>
+                  <div>
+                    <?!= renBlob ?>
+                  </div>
+                </body>
+                  <script> 
+                    document.addEventListener("DOMContentLoaded", eRun)
+                    function eRun() {
+                        document.getElementById("pageObj").innerHTML = <?!= JSON.stringify(e) ?>
+                      } 
+                  </script>
+              </html>`,
+    {
+      renBlob: this[libName].contentApp(
+        `          
       <html id="doGet">
         <head>
           <base target="_self">
@@ -46,7 +83,9 @@ var doGet = function (e) {
           </style
         </head>
         <body>
-          <?!= appL ?>
+          <div id="coApp">
+            <?!= appL ?>
+          </div>
           <div class="row">
             <div class="col s7 l7 m7 card-panel push-m2 push-s2 push-l2">
               <div class="video-container"> 
@@ -65,17 +104,20 @@ var doGet = function (e) {
             </div>
           </div>
           <script>
+            if (<?!= typeof appL !== "undefined" ?>) {
             console.log(<?!= appL.length ?>)
-            if (<?!= appL.length === 99 ?>) {document.getElementById("indexBeta").src = <?= appL ?>}
-            else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}
+              if (<?!= appL.length === 99 || appL.length === 94 || appL.length === 101 || appL.length === 132 || appL.length === 83 ?>) {
+              document.getElementById("coApp").innerHTML = ""
+              document.getElementById("indexBeta").src = <?= appL ?>}
+            else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}}
           </script>
         </body>
       </html>`,
-      {
-        appL: this[libName][
-          foobarr ||
-            HtmlService.createHtmlOutput(
-              `
+        {
+          appL: this[libName][
+            foobarr ||
+              HtmlService.createHtmlOutput(
+                `
       <html id="doGet">
         <head>
           <base target="_self">
@@ -91,11 +133,11 @@ var doGet = function (e) {
         </body>
       </html>
               `,
-            ).getContent()
-        ].apply(this, [
-          args ||
-            HtmlService.createHtmlOutput(
-              `
+              ).getContent()
+          ].apply(this, [
+            args ||
+              HtmlService.createHtmlOutput(
+                `
               
       <html id="doGet">
         <head>
@@ -112,11 +154,12 @@ var doGet = function (e) {
         </body>
       </html>
               `,
-            ).getContent(),
-        ]),
-      },
-    ),
-    { e: e },
+              ).getContent(),
+          ]),
+        },
+      ),
+      e: JSON.stringify(e),
+    },
   );
 };
 

@@ -397,7 +397,6 @@ var renderTemplate = function (blob, argsObject) {
   );
   return tmp
     .evaluate()
-    .append(funcCheck)
     .append(html)
     .append(schedule)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
