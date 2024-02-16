@@ -3,7 +3,7 @@ var doGet = function (e) {
   var libName = "App";
   var libFunc = foobarr;
   var rndPage = [
-    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS`,
+    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS theWorks ssSheets theRoll`,
   ]
     .toString()
     .split(" ")[
@@ -18,7 +18,7 @@ var doGet = function (e) {
         ),
     )
   ];
-  args = e.parameter["args"] || ["epaWebsite"];
+  args = e.parameter["args"] || ["theWorks"];
   return renderTemplate(
     `<html id="wildSageBrushDoGet">
                 <head>
@@ -87,13 +87,15 @@ var doGet = function (e) {
             <?!= appL ?>
           </div>
           <div class="row">
-            <div class="col s7 l7 m7 card-panel push-m2 push-s2 push-l2">
-              <div class="video-container"> 
+            <div class="col s12 l12 m12 card-panel" style="background-color: #ffc107;">
+              <div class="container"> 
                   <iframe 
+                    class="z-depth-5 card-panel deep-purple darken-1 scale-transition scale-out scale-in btn-large" 
                     src=""
                     id="indexBeta"
-                    width="100%"
-                    height="100%"
+                    style="
+                      width: 100%;
+                      height: 480vh"
                     allow="autoplay"
                     allow="encrypted-media"
                     title="Dontime Life Website"
