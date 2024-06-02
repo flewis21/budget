@@ -108,7 +108,7 @@ var doGet = function (e) {
           <script>
             if (<?!= typeof appL !== "undefined" ?>) {
             console.log(<?!= appL.length ?>)
-              if (<?!= appL.length === 99 || appL.length === 94 || appL.length === 101 || appL.length === 132 || appL.length === 83 ?>) {
+              if (<?!= appL.length === 83 || appL.length === 94 || appL.length === 97 || appL.length === 99 || appL.length === 101 || appL.length === 103 || appL.length === 136 || appL.length === 132 ?>) {
               document.getElementById("coApp").innerHTML = ""
               document.getElementById("indexBeta").src = <?= appL ?>}
             else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}}
