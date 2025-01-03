@@ -18,12 +18,11 @@
     </form>
 
     <script>
-      const scriptURL =
-        "https://script.google.com/macros/s/AKfycbws1AHgKrX82q9EOpS4fJn8l4VjkeANlnIK5g9T6q5wdKpI6068ah2Ryve4U4y0cXe13w/exec"; // Replace with your web app URL
+      const scriptURL = "YOUR_APPS_SCRIPT_WEB_APP_URL";
 
       async function fetchData() {
         try {
-          const response = await fetch(scriptURL + "?action=getData"); // Add query parameter
+          const response = await fetch(scriptURL + "?action=getData");
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -43,7 +42,7 @@
         const data = {};
         formData.forEach((value, key) => (data[key] = value));
         try {
-          const response = await fetch(scriptURL + "?action=submitForm", {
+          const response = await fetch(scriptURL, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
