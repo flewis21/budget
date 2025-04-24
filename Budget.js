@@ -102,15 +102,23 @@ var doGet = function (e) {
     )
   ];
   console.log("rndPage:", rndPage);
-  var index = rndPage.findIndex(function (element) {
+  var index = [
+    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
+  ].findIndex(function (element) {
     return element === e.parameter["args"][0];
   });
-  var tres = rndPage.findIndex(function (element) {
+  var tres = [
+    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
+  ].findIndex(function (element) {
     return element === funcTres;
   });
   console.log("index:", index + "\ntres", tres);
   var args;
-  index !== -1 ? (args = rndPage[index]) : (args = ["theWorks"]);
+  index !== -1
+    ? (args = [
+        `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
+      ][index])
+    : (args = ["theWorks"]);
   console.log("e {parameter: {func: " + e.parameter["func"] + "}}");
   let templateName = e.parameter["func"];
   if (e.parameter["func"] === "crmGWI") {
