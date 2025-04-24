@@ -101,6 +101,7 @@ var doGet = function (e) {
         ),
     )
   ];
+  console.log("rndPage:", rndPage);
   var index = rndPage.findIndex(function (element) {
     return element === e.parameter["args"][0];
   });
