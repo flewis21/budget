@@ -102,7 +102,7 @@ var doGet = function (e) {
     )
   ];
   var index = rndPage.findIndex(function (element) {
-    return element === e.parameter["args"];
+    return element === e.parameter["args"][0];
   });
   var tres = rndPage.findIndex(function (element) {
     return element === funcTres;
