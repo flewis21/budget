@@ -1,7 +1,7 @@
 var doGet = function (e) {
   var libName = "App";
   if (e && e.parameter && e.parameter.action === "getData") {
-    this[libName].handleRequest(e);
+    return this[libName].handleRequest(e);
   } else {
     if (e && e.parameter["file"]) {
       var funcTres = e.parameter["file"];
