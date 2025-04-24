@@ -165,7 +165,7 @@ var doGet = function (e) {
                       <script>;var objUrl 
       = document.getElementById("pageObj");var jsonInput 
       = document.getElementById("jsonInput");var currentE 
-      = <?= JSON.stringify(e) ?>;document.addEventListener("DOMContentLoaded", eRun)
+      = <?= e ?>;document.addEventListener("DOMContentLoaded", eRun)
                         function eRun() {
         objUrl.innerHTML 
       = <?= JSON.stringify(e) ?>;jsonInput.style.display 
@@ -284,7 +284,7 @@ var doGet = function (e) {
               tupL: rndPage[tres] || args,
             },
           ),
-          e: JSON.stringify(e),
+          e: e,
           homePage: this[libName].getScriptUrl(),
         },
       );
