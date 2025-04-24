@@ -285,6 +285,7 @@ var doGet = function (e) {
             },
           ),
           e: JSON.stringify(e),
+          homePage: this[libName].getScriptUrl(),
         },
       );
     } catch (error) {
