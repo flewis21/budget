@@ -94,7 +94,7 @@ var doGet = function (e) {
       Math.random() *
         Math.floor(
           [
-            `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS`,
+            `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
           ]
             .toString()
             .split(" ").length,
@@ -109,7 +109,7 @@ var doGet = function (e) {
   });
   console.log("index:", index + "\ntres", tres);
   var args;
-  index !== -1 ? (args = htmlArray[index]) : (args = ["theWorks"]);
+  index !== -1 ? (args = rndPage[index]) : (args = ["theWorks"]);
   console.log("e {parameter: {func: " + e.parameter["func"] + "}}");
   let templateName = e.parameter["func"];
   if (e.parameter["func"] === "crmGWI") {
