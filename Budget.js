@@ -185,7 +185,7 @@ var doGet = function (e) {
         {
           renBlob: this[libName].contentApp(
             `          
-          <html id="doGet">
+          <html id="renderTemplate_blob">
             <head>
               <base target="_self">
               <meta charset="utf-8">
@@ -246,7 +246,7 @@ var doGet = function (e) {
                 foobarr ||
                   HtmlService.createHtmlOutput(
                     `
-          <html id="doGet">
+          <html id="appL_func">
             <head>
               <base target="_self">
               <meta charset="utf-8">
@@ -267,7 +267,7 @@ var doGet = function (e) {
                   HtmlService.createHtmlOutput(
                     `
                   
-          <html id="doGet">
+          <html id="appL_args">
             <head>
               <base target="_self">
               <meta charset="utf-8">
