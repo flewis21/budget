@@ -112,10 +112,8 @@ var doGet = function (e) {
     .split(" ")
     .findIndex(function (element) {
       if (Array.isArray(e.parameter["args"])) {
-        console.log("index:", e.parameter["args"][0]);
         return element === e.parameter["args"][0];
       } else {
-        console.log("index:", e.parameter["args"]);
         return element === e.parameter["args"];
       }
     });
@@ -125,7 +123,6 @@ var doGet = function (e) {
     .toString()
     .split(" ")
     .findIndex(function (element) {
-      console.log("tres:", funcTres);
       return element === funcTres;
     });
   console.log("index:", index + "\ntres", tres);
@@ -133,7 +130,9 @@ var doGet = function (e) {
   index !== -1
     ? (args = [
         `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-      ][index])
+      ]
+        .toString()
+        .split(" ")[index])
     : (args = ["theWorks"]);
   console.log("e {parameter: {func: " + e.parameter["func"] + "}}");
   let templateName = e.parameter["func"];
