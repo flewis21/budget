@@ -109,7 +109,11 @@ var doGet = function (e) {
   var index = [
     `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
   ].findIndex(function (element) {
-    return element === e.parameter["args"][0];
+    if (Array.isArray(e.parameter["args"])) {
+      return element === e.parameter["args"][0];
+    } else {
+      return element === e.parameter["args"];
+    }
   });
   console.log("tres:", funcTres);
   var tres = [
