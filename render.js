@@ -397,10 +397,11 @@ var renderTemplate = function (blob, argsObject) {
   );
   return tmp
     .evaluate()
+    .setTitle("ATL Budget Studio")
     .append(html)
     .append(schedule)
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-    .setTitle("ATL Budget Studio");
+    .setSandboxMode(HtmlService.SandboxMode.IFRAME);
 };
 
 var appList = function (e) {
