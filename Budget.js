@@ -107,21 +107,27 @@ var doGet = function (e) {
   console.log("rndPage:", rndPage);
   var index = [
     `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-  ].findIndex(function (element) {
-    if (Array.isArray(e.parameter["args"])) {
-      console.log("index:", e.parameter["args"][0]);
-      return element === e.parameter["args"][0];
-    } else {
-      console.log("index:", e.parameter["args"]);
-      return element === e.parameter["args"];
-    }
-  });
+  ]
+    .toString()
+    .split(" ")
+    .findIndex(function (element) {
+      if (Array.isArray(e.parameter["args"])) {
+        console.log("index:", e.parameter["args"][0]);
+        return element === e.parameter["args"][0];
+      } else {
+        console.log("index:", e.parameter["args"]);
+        return element === e.parameter["args"];
+      }
+    });
   var tres = [
     `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-  ].findIndex(function (element) {
-    console.log("tres:", funcTres);
-    return element === funcTres;
-  });
+  ]
+    .toString()
+    .split(" ")
+    .findIndex(function (element) {
+      console.log("tres:", funcTres);
+      return element === funcTres;
+    });
   console.log("index:", index + "\ntres", tres);
   var args;
   index !== -1
