@@ -162,7 +162,7 @@ var doGet = function (e) {
                       <div id="pageObj"></div>
                   <textarea id="jsonInput" style="display: none;width: 80%;min-height: 200px;margin:10px auto;padding:10px;border:1px solid #ccc;font-family:monospace;white-space:pre-wrap;text-align:left;"></textarea>
                   <div>
-                        <?!= HtmlService.createTemplate(renBlob).evaluate().getContent() ?>
+                        <?!= renBlob ?>
                       </div>
                     </body>
                       <script>;var objUrl 
@@ -230,7 +230,7 @@ var doGet = function (e) {
                         ></iframe>
                   </div>
                 </div>
-              </div>
+              </div><div class="container"><?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?></div>
               <script>
                 if (<?!= typeof appL !== "undefined" ?>) {
                 console.log(<?!= appL.length ?>)
