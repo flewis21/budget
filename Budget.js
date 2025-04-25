@@ -210,7 +210,7 @@ var doGet = function (e) {
             </head>
             <body>
               <div id="coApp">
-                <?= appL ?>
+                <?= JSON.stringify(appL) ?>
               </div><div><?!= HtmlService.createTemplateFromFile(tupL).evaluate().getContent() ?></div>
               <div class="row">
                 <div class="col s12 l12 m12 card-panel responsive-section" style="background-color: #ffc107;">
@@ -232,11 +232,11 @@ var doGet = function (e) {
                 </div>
               </div><div class="container"><?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?></div>
               <script>
-                if (<?!= typeof appL !== "undefined" ?>) {
-                console.log(<?!= appL.length ?>)
-                  if (<?!= appL.length === 83 || appL.length === 94 || appL.length === 97 || appL.length === 99 || appL.length === 101 || appL.length === 103 || appL.length === 136 || appL.length === 132 ?>) {
+                if (<?!= typeof appL["index"] !== "undefined" ?>) {
+                console.log(<?!= appL["index"].length ?>)
+                  if (<?!= appL["index"].length === 83 || appL["index"].length === 94 || appL["index"].length === 97 || appL["index"].length === 99 || appL["index"].length === 101 || appL["index"].length === 103 || appL["index"].length === 136 || appL["index"].length === 132 ?>) {
                   document.getElementById("coApp").innerHTML = ""
-                  document.getElementById("indexBeta").src = <?= appL ?>}
+                  document.getElementById("indexBeta").src = <?= appL["index"] ?>}
                 else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}}
               </script>
             </body>
