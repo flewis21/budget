@@ -105,11 +105,13 @@ var doGet = function (e) {
     )
   ];
   console.log("rndPage:", rndPage);
+  console.log("index:", e.parameter["args"][0]);
   var index = [
     `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
   ].findIndex(function (element) {
     return element === e.parameter["args"][0];
   });
+  console.log("tres:", funcTres);
   var tres = [
     `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
   ].findIndex(function (element) {
