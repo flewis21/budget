@@ -88,52 +88,38 @@ var doGet = function (e) {
   console.log("funcDos:", funcDos);
   var foobarr = funcUno || "renderFile";
   var libFunc = foobarr;
-  var rndPage = [
+  var htmlArray = [
     `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
   ]
     .toString()
-    .split(" ")[
-    Math.floor(
-      Math.random() *
-        Math.floor(
-          [
-            `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-          ]
-            .toString()
-            .split(" ").length,
-        ),
-    )
-  ];
+    .split(" ");
+  var rndPage =
+    htmlArray[
+      Math.floor(
+        Math.random() *
+          Math.floor(
+            [
+              `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
+            ]
+              .toString()
+              .split(" ").length,
+          ),
+      )
+    ];
   console.log("rndPage:", rndPage);
-  var index = [
-    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-  ]
-    .toString()
-    .split(" ")
-    .findIndex(function (element) {
-      if (Array.isArray(e.parameter["args"])) {
-        return element === e.parameter["args"][0];
-      } else {
-        return element === e.parameter["args"];
-      }
-    });
-  var tres = [
-    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-  ]
-    .toString()
-    .split(" ")
-    .findIndex(function (element) {
-      return element === funcTres;
-    });
+  var index = htmlArray.findIndex(function (element) {
+    if (Array.isArray(e.parameter["args"])) {
+      return element === e.parameter["args"][0];
+    } else {
+      return element === e.parameter["args"];
+    }
+  });
+  var tres = htmlArray.findIndex(function (element) {
+    return element === funcTres;
+  });
   console.log("index:", index + "\ntres", tres);
   var args;
-  index !== -1
-    ? (args = [
-        `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-      ]
-        .toString()
-        .split(" ")[index])
-    : (args = ["theWorks"]);
+  index !== -1 ? (args = [htmlArray[index]]) : (args = ["theWorks"]);
   console.log("e {parameter: {func: " + e.parameter["func"] + "}}");
   let templateName = e.parameter["func"];
   if (e.parameter["func"] === "crmGWI") {
