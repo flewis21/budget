@@ -162,7 +162,7 @@ var doGet = function (e) {
                       <div id="pageObj"></div>
                   <textarea id="jsonInput" style="display: none;width: 80%;min-height: 200px;margin:10px auto;padding:10px;border:1px solid #ccc;font-family:monospace;white-space:pre-wrap;text-align:left;"></textarea>
                   <div>
-                        <?= renBlob ?>
+                        <?!= HtmlService.createTemplate(renBlob).evaluate().getContent() ?>
                       </div>
                     </body>
                       <script>;var objUrl 
