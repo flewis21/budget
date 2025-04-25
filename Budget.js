@@ -94,19 +94,7 @@ var doGet = function (e) {
     .toString()
     .split(" ");
   var rndPage =
-    htmlArray[
-      Math.floor(
-        Math.random() *
-          Math.floor(
-            [
-              `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
-            ]
-              .toString()
-              .split(" ").length,
-          ),
-      )
-    ];
-  console.log("rndPage:", rndPage);
+    htmlArray[Math.floor(Math.random() * Math.floor(htmlArray.length))];
   var index = htmlArray.findIndex(function (element) {
     if (Array.isArray(e.parameter["args"])) {
       return element === e.parameter["args"][0];
@@ -283,7 +271,7 @@ var doGet = function (e) {
                   `,
                   ).getContent(),
               ]),
-              tupL: rndPage[tres] || args,
+              tupL: htmlArray[tres] || args,
             },
           ),
           e: e,
