@@ -275,7 +275,8 @@ var doGet = function (e) {
                   `,
                   ).getContent()
               ].apply(this, [
-                args ||
+                e.parameter["args"] ||
+                  args ||
                   HtmlService.createHtmlOutput(
                     `
                   
