@@ -151,7 +151,21 @@ var doGet = function (e) {
                         <?!= renBlob ?>
                       </div>
                     </body>
-                      <script>;var objUrl 
+                      <script>;
+      function serverSide(func, args) {
+        return new Promise((resolve, reject) => {
+          google.script.run
+            .withSuccessHandler((result) => {
+              resolve(result);
+            })
+            .withFailureHandler((error) => {
+              console.log(error);
+              console.log(document.getElementById("test").innerHTML);
+              reject(error);
+            })
+            .runBoilerplate(func, args);
+        });
+      };var objUrl 
       = document.getElementById("pageObj");var jsonInput 
       = document.getElementById("jsonInput");var currentE 
       = <?= e ?>;document.addEventListener("DOMContentLoaded", eRun)
@@ -163,8 +177,15 @@ var doGet = function (e) {
       };
       jsonInput.addEventListener("change", function() {
         try {var parsedE 
-      = JSON.parse(jsonInput.value);console.log("Updated e object:", parsedE);currentE 
-      = parsedE;var textRes = <?= homePage ?> + "?func=" + currentE.parameter["func"] + "&args=" + currentE.parameter["args"];alert("e object updated (check the console). You would now typically send this back to the server.");window.open(textRes);}
+      = JSON.parse(jsonInput.value);console.log("Updated e object:", parsedE);serverSide(parsedE.parameter["func"], parsedE.parameter["args"]).then(validationResult => {
+        console.log("Server validation result:", validationResult);
+        if (validationResult.isValid) {
+        alert("e object validated successfully on the server")}
+        else {alert("Server validation failed: " + validationResult.errorMessage);console.error("Server vaslidation failed:", validationResult);//give parameter feedback
+        }}).catch(error => {
+          alert("Error during server validation: " + error);console.error("Server validation error:", error)});currentE 
+      = parsedE;var textRes 
+      = <?= homePage ?> + "?func=" + currentE.parameter["func"] + "&args=" + currentE.parameter["args"];alert("e object updated (check the console). You would now typically send this back to the server.");window.open(textRes);}
         catch (error) {alert("Error parsing JSON. Please ensure the input is valid JSON.");console.error("JSON parsing error:", error);};});
               </script>
                   </html>`,
