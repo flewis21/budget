@@ -216,7 +216,7 @@ var doGet = function (e) {
             </head>
             <body>
               <div id="coApp">
-                <?= JSON.stringify(appL) ?>
+                <?= JSON.stringify(appL["index"]) ?>
               </div><div><?!= HtmlService.createTemplateFromFile(tupL).evaluate().getContent() ?></div>
               <div class="row">
                 <div class="col s12 l12 m12 card-panel responsive-section" style="background-color: #ffc107;">
