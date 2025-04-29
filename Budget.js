@@ -227,7 +227,7 @@ var doGet = function (e) {
                         id="indexBeta"
                         style="
                           width: 100%;
-                          height: 200vh"
+                          height: 50vh"
                         allow="autoplay"
                         allow="encrypted-media"
                         title="Dontime Life Website"
