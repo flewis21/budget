@@ -240,9 +240,9 @@ var doGet = function (e) {
               <script>
                 if (<?!= typeof appL["index"] !== "undefined" ?>) {
                 console.log(<?!= appL["index"].length ?>)
-                  if (<?!= appL["index"].length === 83 || appL["index"].length === 94 || appL["index"].length === 97 || appL["index"].length === 99 || appL["index"].length === 101 || appL["index"].length === 103 || appL["index"].length === 136 || appL["index"].length === 132 ?>) {
+                  if (<?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>) {
                   document.getElementById("coApp").innerHTML = ""
-                  document.getElementById("indexBeta").src = <?= appL["index"] ?>}
+                  document.getElementById("indexBeta").src = <?= appL["app"] ?>}
                 else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}}
               </script>
             </body>
