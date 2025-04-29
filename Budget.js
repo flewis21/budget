@@ -177,7 +177,7 @@ var doGet = function (e) {
       };
       jsonInput.addEventListener("change", function() {
         try {var parsedE 
-      = JSON.parse(jsonInput.value);console.log("Updated e object:", parsedE);serverSide(parsedE.parameter["func"], parsedE.parameter["args"]).then(validationResult => {
+      = JSON.parse(jsonInput.value);console.log("Updated e object:", parsedE);serverSide(parsedE.parameter["func"], [parsedE.parameter["args"]]).then(validationResult => {
         if (validationResult.app) {
         alert("e object validated successfully on the server");currentE 
       = parsedE;var textRes 
