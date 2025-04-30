@@ -312,9 +312,20 @@ var doGet = function (e) {
 
 var doPost = function (e) {
   var libName = "App";
-  if (e && e.parameter && e.parameter.action === "submitForm") {
-    return this[libName].handleRequest(e);
+  try {
+    if (e && e.parameter && e.parameter.action === "submitForm") {
+      return this[libName].handleRequest(e);
+    }
+  } catch (error) {
+    console.error("Error in doPost:", error);
+    return ContentService.createTextOutput(
+      JSON.stringify({
+        success: false,
+        message: "Error processing form submission: " + error.message,
+      }),
+    ).setMimeType(ContentService.MimeType.JSON);
   }
+  return; // Or a default response if needed
 };
 
 var runBoilerplate = function (func, args) {
