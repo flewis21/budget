@@ -43,13 +43,16 @@
         const data = {};
         formData.forEach((value, key) => (data[key] = value));
         try {
-          const response = await fetch(scriptURL + "?action=submitForm", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const response = await fetch(
+            encodeURIComponent(scriptURL + "?action=submitForm"),
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
             },
-            body: JSON.stringify(data),
-          });
+          );
 
           if (!response.ok) {
             const errorText = await response.text();
