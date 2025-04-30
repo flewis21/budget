@@ -163,8 +163,8 @@ var doGet = function (e) {
               console.log(document.getElementById("test").innerHTML);
               reject(error);
             })
-            .runBoilerplate(func, args);
-        });
+            .runBoilerplate(func, args)
+        }); 
       };var objUrl 
       = document.getElementById("pageObj");var jsonInput 
       = document.getElementById("jsonInput");var currentE 
