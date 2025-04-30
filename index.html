@@ -43,7 +43,7 @@
         const data = {};
         formData.forEach((value, key) => (data[key] = value));
         try {
-          const response = await fetch(scriptURL, {
+          const response = await fetch(scriptURL + "?action=submitForm", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
