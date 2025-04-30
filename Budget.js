@@ -335,6 +335,12 @@ var doPost = function (e) {
   var libName = "App";
   try {
     if (e && e.parameter && e.parameter.action === "submitForm") {
+      var formData = JSON.parse(e.postData.contents);
+      MailApp.sendEmail({
+        to: "promanual-support@googlegroups.com",
+        subject: "New Form Submission",
+        body: JSON.stringify(formData),
+      });
       return this[libName].handleRequest(e);
     }
   } catch (error) {
