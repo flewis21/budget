@@ -178,11 +178,16 @@ var doGet = function (e) {
       jsonInput.addEventListener("change", function() {
         try {var parsedE 
       = JSON.parse(jsonInput.value);console.log("Updated e object:", parsedE);alert("e object updated (check the console). You would now typically send this back to the server.");serverSide(parsedE.parameter["func"], [parsedE.parameter["args"]]).then(validationResult => {
-        if (validationResult.app) {
+        if (validationResult.error) {let errorMessage 
+        = "Server validation failed:\n";for (var funcName in validationResult.details) {
+        if (Object.prototype.hasOwnProperty.call(validationResults.details, funcName)) {
+        errorMessage += ${funcName}: ${validationResult.details[funcName]}\n;}
+      };alert(errorMessage);console.error("Server validation failed:", validationResult)}
+        else if (validationResult.app) {
         alert("e object validated successfully on the server");currentE 
       = parsedE;var textRes 
       = <?= homePage ?> + "?func=" + currentE.parameter["func"] + "&args=" + currentE.parameter["args"];window.open(textRes);}
-        else {alert("Server validation failed: " + validationResult);console.error("Server validation failed:", validationResult);//give parameter feedback
+        else {alert("Server validation failed: Unknown error");console.error("Server validation failed:", validationResult);//give parameter feedback
         }}).catch(error => {
           alert("Error during server validation: " + error);console.error("Server validation error:", error)});}
         catch (error) {alert("Error parsing JSON. Please ensure the input is valid JSON.");console.error("JSON parsing error:", error);};});
