@@ -236,10 +236,10 @@ var doGet = function (e) {
                         ></iframe>
                   </div>
                 </div>
-              </div><div class="container"><?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?></div>
+              </div><div class="responsive-section"><div class="container"><?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?></div></div>
               <script>
-                if (<?!= typeof appL["index"] !== "undefined" ?>) {
-                console.log(<?!= appL["index"].length ?>)
+                if (<?!= typeof appL["app"] !== "undefined" ?>) {
+                console.log(<?!= appL["app"].length ?>)
                   if (<?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>) {
                   document.getElementById("coApp").innerHTML = ""
                   document.getElementById("indexBeta").src = <?= appL["app"] ?>}
