@@ -310,6 +310,13 @@ var doGet = function (e) {
   }
 };
 
+var doPost = function (e) {
+  var libName = "App";
+  if (e && e.parameter && e.parameter.action === "submitForm") {
+    return this[libName].handleRequest(e);
+  }
+};
+
 var runBoilerplate = function (func, args) {
   var libName = "App";
   var libFunc = func || "doGet";
