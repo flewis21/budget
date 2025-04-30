@@ -169,25 +169,33 @@ var doGet = function (e) {
       = document.getElementById("pageObj");var jsonInput 
       = document.getElementById("jsonInput");var currentE 
       = <?= e ?>;document.addEventListener("DOMContentLoaded", eRun)
-                        function eRun() {
+      function eRun() {
         objUrl.innerHTML 
       = <?= JSON.stringify(e) ?>;jsonInput.style.display 
       = "block";jsonInput.value 
       = <?= JSON.stringify(e, null, 2) ?>
       };
       jsonInput.addEventListener("change", function() {
-        try {var parsedE 
-      = JSON.parse(jsonInput.value);console.log("Updated e object:", parsedE);alert("e object updated (check the console). You would now typically send this back to the server.");serverSide(parsedE.parameter["func"], [parsedE.parameter["args"]]).then(validationResult => {
-        console.log("Actual validation result: " + validationResult);if (validationResult.app) {
+        try {
+          var parsedE 
+      = JSON.parse(jsonInput.value);alert("e object updated (check the console). You would now typically send this back to the server.");console.log("Updated e object:", parsedE);serverSide(parsedE.parameter["func"], [parsedE.parameter["args"]]).then(validationResult => {
+        console.log("Actual validation result: " + validationResult);
+      if (validationResult.app) {
         alert("e object validated successfully on the server");currentE 
       = parsedE;var textRes 
-      = <?= homePage ?> + "?func=" + currentE.parameter["func"] + "&args=" + currentE.parameter["args"];window.open(textRes);}
-        else {alert("Server validation failed: Unknown error");console.error("Server validation failed:", validationResult);//give parameter feedback
-        }}).catch(error => {
-          alert("Error during server validation: " + error);console.error("Server validation error:", error)});}
-        catch (error) {alert("Error parsing JSON. Please ensure the input is valid JSON.");console.error("JSON parsing error:", error);};});
-              </script>
-                  </html>`,
+      = <?= homePage ?> + "?func=" + currentE.parameter["func"] + "&args=" + currentE.parameter["args"];window.open(textRes);
+      }
+      else {
+        alert("Server validation failed: Unknown error");console.error("Server validation failed:", validationResult);//give parameter feedback
+      }}).catch(error => {
+          alert("Error during server validation: " + error);console.error("Server validation error:", error)
+        });
+      }
+        catch(error) {
+          alert("Error parsing JSON. Please ensure the input is valid JSON.");console.error("JSON parsing error:", error);
+        };
+      });</script>
+    </html>`,
         {
           renBlob: this[libName].contentApp(
             `          
@@ -217,7 +225,10 @@ var doGet = function (e) {
             <body>
               <div id="coApp">
                 <?= JSON.stringify(appL["index"]) ?>
-              </div><div><?!= HtmlService.createTemplateFromFile(tupL).evaluate().getContent() ?></div>
+              </div>
+              <div class="container">
+                <?!= HtmlService.createTemplateFromFile(tupL).evaluate().getContent() ?>
+              </div>
               <div class="row">
                 <div class="col s12 l12 m12 card-panel responsive-section" style="background-color: #ffc107;">
                   <div class="container"> 
@@ -236,15 +247,25 @@ var doGet = function (e) {
                         ></iframe>
                   </div>
                 </div>
-              </div><div class="responsive-section"><div class="container"><?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?></div></div>
+              </div>
+              <div class="responsive-section">
+                <div class="container">
+                  <?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?>
+                </div>
+              </div>
               <script>
                 if (<?!= appL && typeof appL === "object" && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>) {
-                console.log(<?!= appL["app"].length ?>)
+                  console.log(<?!= appL["app"].length ?>);
                   if (<?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>) {
-                  document.getElementById("coApp").innerHTML = ""
-                  document.getElementById("indexBeta").src = <?= appL["app"] ?>}}
-                else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}
-              </script>
+                    document.getElementById("coApp").innerHTML 
+                  = "";document.getElementById("indexBeta").src 
+                  = <?= appL["app"] ?>
+                }
+              }
+                else {
+                  document.getElementById("indexBeta").src 
+                = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+              }</script>
             </body>
           </html>`,
             {
@@ -262,7 +283,7 @@ var doGet = function (e) {
             </head>
             <body>
               <script>
-                    document.getElementById("appList").value
+                document.getElementById("appList").value
               </script>
             </body>
           </html>
@@ -284,7 +305,7 @@ var doGet = function (e) {
             </head>
             <body>
               <script>
-                    document.getElementById("username").value
+                document.getElementById("username").value
               </script>
             </body>
           </html>
