@@ -238,12 +238,12 @@ var doGet = function (e) {
                 </div>
               </div><div class="responsive-section"><div class="container"><?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):appL["app"] ?></div></div>
               <script>
-                if (<?!= typeof appL["app"] !== "undefined" ?>) {
+                if (<?!= appL && typeof appL === "object" && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>) {
                 console.log(<?!= appL["app"].length ?>)
                   if (<?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>) {
                   document.getElementById("coApp").innerHTML = ""
-                  document.getElementById("indexBeta").src = <?= appL["app"] ?>}
-                else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}}
+                  document.getElementById("indexBeta").src = <?= appL["app"] ?>}}
+                else {document.getElementById("indexBeta").src = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242"}
               </script>
             </body>
           </html>`,
