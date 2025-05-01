@@ -23,11 +23,7 @@
 
       async function fetchData() {
         try {
-          const response = await fetch(scriptURL + "?action=getData", {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          const response = await fetch(scriptURL + "?action=getData");
           if (!response.ok) {
             const errorText = await response.text();
             throw new Error(
