@@ -255,8 +255,8 @@ var doGet = function (e) {
                 </div>
               </div>
               <script>
-                if (<?!= appL && typeof appL === "object" && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>) {
-                  console.log(<?!= appL["app"].length ?>);
+                if (<?!= appL && typeof appL === "object" &&  appL.hasOwnProperty("app") && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>) {
+                  console.log("appL['app'] length:", <?!= appL["app"].length ?>);
                   if (<?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>) {
                     document.getElementById("indexBeta").src 
                   = <?= appL["app"] ?>
