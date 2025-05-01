@@ -266,30 +266,11 @@ var doGet = function (e) {
                   = <?= appL["app"] ?>
                 }
                 else {
-                  var wfEmbed;
-                  var weFormed;
-                  var emBedWell;
                   try {
-                    wfEmbed = XmlService.parse(appL["app"]);
-                    if (wfEmbed && typeof wfEmbed !== "undefined") {
-                      try {
-                        emBedWell = wfEmbed.getRootElement(XmlService.parse(appL["app"])).getChild("body");
-                        if (emBedWell && typeof emBedWell !== "undefined") {
-                          try {
-                            weFormed = XmlService.getPrettyFormat().format(emBedWell);
-                            try {
-                              document.getElementById("coApp").innerHTML 
-                            = <?= HtmlService.createTemplate(emBedWell.toString()).evaluate().getContent() ?>;
-                          }
-                            catch(error) {console.error('Error setting "coApp" innerHTML:', error)}
-                          }
-                          catch(error) {console.error('Error formatting body from appL["app"]:', error)}
-                      }
-                      }
-                      catch(error) {console.error('Error getting body from appL["app"]:', error)}
-                    }
-                  }
-                  catch(error) {console.error('Error parsing appL["app"]:', error)}
+                    document.getElementById("coApp").innerHTML 
+                  = <?= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
+                }
+                    catch(error) {console.error('Error setting "coApp" innerHTML:', error)}
                 ;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
