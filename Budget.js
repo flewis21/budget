@@ -261,8 +261,9 @@ var doGet = function (e) {
                   = <?= appL["app"] ?>
                 }
                   else {
+                  
                     document.getElementById("coApp").innerHTML 
-                  = <?!= XmlService.getPrettyFormat().format(XmlService.parse(appL["app"]).getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
+                  = <?!= XmlService.getPrettyFormat().format(XmlService.parse(appL["app"].toString()).getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
