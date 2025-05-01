@@ -252,33 +252,46 @@ var doGet = function (e) {
                 </div>
               </div>
               <div class="responsive-section">
-                <div class="container">
-                  <?!= typeof appL === "object" && typeof appL["app"] !== "string" ? JSON.stringify(appL["app"]):"" ?>
-                </div>
+                <div class="container" id="appLApp"></div>
               </div>
               <script>
-                var testApp = <?!= appL && typeof appL === "object" &&  appL.hasOwnProperty("app") && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>;
+                var laApp = document.getElementById("appLApp")
+                var testApp = <?!= appL ?>
                 if (testApp) {
-                  console.log('appL["app"] length:', <?!= appL["app"].length ?>);
-                  var appLength = <?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>
-                  if (appLength) {
+                  if (typeof testApp === "object") {
+                    if (testApp.hasOwnProperty("app")) {
+                      var testAppRes = testApp["app"]
+                      if (typeof testAppRes === "string") {
+                        laApp.innerHTML = HtmlService.createTemplate(testAppRes).evaluate().getContent();
+                        console.log('appL["app"] length:', testAppRes.length);
+                        if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
+                          document.getElementById("indexBeta").src 
+                          = testAppRes
+                        }
+                        else {
+                          try {
+                            document.getElementById("coApp").innerHTML 
+                            = HtmlService.createTemplate(testAppRes).evaluate().getContent();
+                           };document.getElementById("indexBeta").src 
+                             = testApp["index"]
+                        } 
+                      }
+                      else {
+                        laApp.innerHTML = JSON.stringify(testAppRes);
+                        document.getElementById("indexBeta").src 
+                      = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                        }
+                      }
+                    }
+                    else {
+                      document.getElementById("indexBeta").src 
+                    = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                  }
+                  }
+                  else {
                     document.getElementById("indexBeta").src 
-                  = <?= appL["app"] ?>
-                }
-                else {
-                  try {
-                    document.getElementById("coApp").innerHTML 
-                  = <?= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
-                }
-                    catch(error) {console.error('Error setting "coApp" innerHTML:', error)}
-                ;document.getElementById("indexBeta").src 
-                  = <?= appL["index"] ?>
-                }
-              }
-                else {
-                  document.getElementById("indexBeta").src 
-                = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
-              }</script>
+                  = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                }</script>
             </body>
           </html>`,
             {
