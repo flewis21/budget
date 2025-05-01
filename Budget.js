@@ -263,11 +263,16 @@ var doGet = function (e) {
                 }
                   else {
                   var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent());
+                if (wfEmbed) {
                   var emBedWell = wfEmbed.getRootElement().getChild("body");
-                  var weFormed = XmlService.getPrettyFormat().format(emBedWell)
+                }
+                  if (emBedWell) {
+                  var weFormed = XmlService.getPrettyFormat().format(emBedWell);
+                }
                   if (weFormed) {
                     document.getElementById("coApp").innerHTML 
-                  = <?!= weFormed ?>};document.getElementById("indexBeta").src 
+                  = <?!= weFormed ?>;
+                };document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
