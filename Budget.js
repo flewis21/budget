@@ -266,9 +266,9 @@ var doGet = function (e) {
                   = <?= appL["app"] ?>
                 }
                 else {
-                  let wfEmbed;
-                  let weFormed;
-                  let emBedWell;
+                  var wfEmbed;
+                  var weFormed;
+                  var emBedWell;
                   try {
                     var serveHtml = HtmlService.createTemplate(appL["app"]).getRawContent()
                     wfEmbed = XmlService.parse(serveHtml);
