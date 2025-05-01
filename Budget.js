@@ -199,6 +199,7 @@ var doGet = function (e) {
         {
           renBlob: this[libName].contentApp(
             `          
+          <!DOCTYPE html>
           <html id="renderTemplate_blob">
             <head>
               <base target="_self">
