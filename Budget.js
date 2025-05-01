@@ -262,7 +262,7 @@ var doGet = function (e) {
                 }
                   else {
                     document.getElementById("coApp").innerHTML 
-                  = <?!= appL["app"].toString() ?>;document.getElementById("indexBeta").src 
+                  = <?!= .XmlService.getPrettyFormat().format(XmlService.parse(appL["app"]).getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
