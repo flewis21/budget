@@ -273,13 +273,13 @@ var doGet = function (e) {
                     wfEmbed = XmlService.parse(appL["app"]);
                     if (wfEmbed && typeof wfEmbed !== "undefined") {
                       try {
-                        emBedWell = wfEmbed.getRootElement().getChild("body");
+                        emBedWell = wfEmbed.getRootElement(XmlService.parse(appL["app"])).getChild("body");
                         if (emBedWell && typeof emBedWell !== "undefined") {
                           try {
                             weFormed = XmlService.getPrettyFormat().format(emBedWell);
                             try {
                               document.getElementById("coApp").innerHTML 
-                            = <?!= HtmlService.createTemplate(weFormed).evaluate().getContent() ?>;
+                            = <?!= HtmlService.createTemplate(emBedWell.toString()).evaluate().getContent() ?>;
                           }
                             catch(error) {console.error('Error setting "coApp" innerHTML:', error)}
                           }
