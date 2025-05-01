@@ -264,8 +264,9 @@ var doGet = function (e) {
                   else {
                   var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent());
                   var emBedWell = wfEmbed.getRootElement().getChild("body");
+                  var weFormed = XmlService.getPrettyFormat().format(emBedWell)
                     document.getElementById("coApp").innerHTML 
-                  = <?!= XmlService.getPrettyFormat().format(emBedWell) ?>;document.getElementById("indexBeta").src 
+                  = <?!= weFormed ?>;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
