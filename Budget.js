@@ -262,7 +262,7 @@ var doGet = function (e) {
                 }
                   else {
                     document.getElementById("coApp").innerHTML 
-                  = <?!= JSON.stringify(appL["app"]) ?>;document.getElementById("indexBeta").src 
+                  = "<?!= appL["app"] ?>";document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
