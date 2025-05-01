@@ -270,8 +270,7 @@ var doGet = function (e) {
                   var weFormed;
                   var emBedWell;
                   try {
-                    var serveHtml = HtmlService.createTemplate(appL["app"]).getRawContent()
-                    wfEmbed = XmlService.parse(serveHtml);
+                    wfEmbed = XmlService.parse(appL["app"]);
                     if (wfEmbed && typeof wfEmbed !== "undefined") {
                       try {
                         emBedWell = wfEmbed.getRootElement().getChild("body");
