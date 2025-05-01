@@ -280,7 +280,7 @@ var doGet = function (e) {
                             weFormed = XmlService.getPrettyFormat().format(emBedWell);
                             try {
                               document.getElementById("coApp").innerHTML 
-                            = <?!= weFormed ?>;
+                            = <?!= HtmlService.createTemplate(weFormed).evaluate().getContent() ?>;
                           }
                             catch(error) {console.error('Error setting "coApp" innerHTML:', error)}
                           }
