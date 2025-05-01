@@ -263,13 +263,13 @@ var doGet = function (e) {
                 }
                   else {
                   var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent());
-                if (wfEmbed) {
+                if (wfEmbed && typeof wfEmbed !== "undefined") {
                   var emBedWell = wfEmbed.getRootElement().getChild("body");
                 }
-                  if (emBedWell) {
+                  if (emBedWell && typeof emBedWell !== "undefined") {
                   var weFormed = XmlService.getPrettyFormat().format(emBedWell);
                 }
-                  if (weFormed) {
+                  if (weFormed && typeof weFormed !== "undefined") {
                     document.getElementById("coApp").innerHTML 
                   = <?!= weFormed ?>;
                 };document.getElementById("indexBeta").src 
