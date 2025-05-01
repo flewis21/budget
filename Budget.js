@@ -271,7 +271,7 @@ var doGet = function (e) {
                 }
                   if (weFormed && typeof weFormed !== "undefined") {
                     document.getElementById("coApp").innerHTML 
-                  = <?!= weFormed ?>;
+                  = <?!= weFormed? weFormed:"" ?>;
                 };document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
