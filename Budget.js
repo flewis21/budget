@@ -263,7 +263,7 @@ var doGet = function (e) {
                   else {
                   
                     document.getElementById("coApp").innerHTML 
-                  = <?!= XmlService.getPrettyFormat().format(XmlService.parse(appL["app"].toString()).getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
+                  = <?!= XmlService.getPrettyFormat().format(XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent()).getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
