@@ -262,9 +262,9 @@ var doGet = function (e) {
                   = <?= appL["app"] ?>
                 }
                   else {
-                  
+                  var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent())
                     document.getElementById("coApp").innerHTML 
-                  = <?!= XmlService.getPrettyFormat().format(XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent()).getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
+                  = <?!= XmlService.getPrettyFormat().format(wfEmbed.getRootElement().getChild("body")) ?>;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
