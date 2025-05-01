@@ -121,7 +121,8 @@ var doGet = function (e) {
   ) {
     try {
       return renderTemplate(
-        `<html id="wildSageBrushDoGet">
+        `<!DOCTYPE html>
+                    <html id="wildSageBrushDoGet">
                     <head>
                       <base target="_self">
                       <meta charset="utf-8">
@@ -165,7 +166,8 @@ var doGet = function (e) {
             })
             .runBoilerplate(func, args)
         }); 
-      };var objUrl 
+      };
+      var objUrl 
       = document.getElementById("pageObj");var jsonInput 
       = document.getElementById("jsonInput");var currentE 
       = <?= e ?>;document.addEventListener("DOMContentLoaded", eRun)
@@ -255,24 +257,40 @@ var doGet = function (e) {
                 </div>
               </div>
               <script>
-                if (<?!= appL && typeof appL === "object" &&  appL.hasOwnProperty("app") && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>) {
-                  console.log("appL['app'] length:", <?!= appL["app"].length ?>);
-                  if (<?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>) {
+                var testApp = <?!= appL && typeof appL === "object" &&  appL.hasOwnProperty("app") && typeof appL["app"] !== "undefined" && typeof appL["app"] === "string" ?>;
+                if (testApp) {
+                  console.log('appL["app"] length:', <?!= appL["app"].length ?>);
+                  var appLength = <?!= appL["app"].length === 83 || appL["app"].length === 94 || appL["app"].length === 97 || appL["app"].length === 99 || appL["app"].length === 101 || appL["app"].length === 103 || appL["app"].length === 136 || appL["app"].length === 132 ?>
+                  if (appLength) {
                     document.getElementById("indexBeta").src 
                   = <?= appL["app"] ?>
                 }
-                  else {
-                  var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent());
-                  var weFormed = "";
-                  var emBedWell = "";
-                if (wfEmbed && typeof wfEmbed !== "undefined") {
-                  var emBedWell = wfEmbed.getRootElement().getChild("body");
-                }
-                  if (emBedWell && typeof emBedWell !== "undefined") {
-                  var weFormed = XmlService.getPrettyFormat().format(emBedWell);
-                }
-                    document.getElementById("coApp").innerHTML 
-                  = <?!= weFormed? weFormed:"" ?>;
+                else {
+                  let wfEmbed;
+                  let weFormed;
+                  let emBedWell;
+                  try {
+                    var serveHtml = HtmlService.createTemplate(appL["app"]).getRawContent()
+                    wfEmbed = XmlService.parse(serveHtml);
+                    if (wfEmbed && typeof wfEmbed !== "undefined") {
+                      try {
+                        emBedWell = wfEmbed.getRootElement().getChild("body");
+                        if (emBedWell && typeof emBedWell !== "undefined") {
+                          try {
+                            weFormed = XmlService.getPrettyFormat().format(emBedWell);
+                            try {
+                              document.getElementById("coApp").innerHTML 
+                            = <?!= weFormed ?>;
+                          }
+                            catch(error) {console.error('Error setting "coApp" innerHTML:', error)}
+                          }
+                          catch(error) {console.error('Error formatting body from appL["app"]:', error)}
+                      }
+                      }
+                      catch(error) {console.error('Error getting body from appL["app"]:', error)}
+                    }
+                  }
+                  catch(error) {console.error('Error parsing appL["app"]:', error)}
                 ;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
