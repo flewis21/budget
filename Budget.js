@@ -264,16 +264,16 @@ var doGet = function (e) {
                   else {
                   var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent());
                   var weFormed = "";
+                  var emBedWell = "";
                 if (wfEmbed && typeof wfEmbed !== "undefined") {
                   var emBedWell = wfEmbed.getRootElement().getChild("body");
                 }
                   if (emBedWell && typeof emBedWell !== "undefined") {
                   var weFormed = XmlService.getPrettyFormat().format(emBedWell);
                 }
-                  if (weFormed && typeof weFormed !== "undefined") {
                     document.getElementById("coApp").innerHTML 
                   = <?!= weFormed? weFormed:"" ?>;
-                };document.getElementById("indexBeta").src 
+                ;document.getElementById("indexBeta").src 
                   = <?= appL["index"] ?>
                 }
               }
