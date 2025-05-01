@@ -263,6 +263,7 @@ var doGet = function (e) {
                 }
                   else {
                   var wfEmbed = XmlService.parse(HtmlService.createTemplate(appL["app"]).getRawContent());
+                  var weFormed = "";
                 if (wfEmbed && typeof wfEmbed !== "undefined") {
                   var emBedWell = wfEmbed.getRootElement().getChild("body");
                 }
