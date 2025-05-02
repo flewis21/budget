@@ -279,11 +279,11 @@ var doGet = function (e) {
                        try {
                 console.log("String but not source:", <?!= appL["app"] ?>);
                       document.getElementById("coApp").innerHTML 
-                      = <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent(); ?>
+                      = <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent(); ?>
                      };
                   }
                 console.log("String but no Source or Markup:", <?!= appL["app"] ?>);
-                  laApp.innerHTML = <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
+                  laApp.innerHTML = <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent() ?>;
                   setDefaultUrl()
                 }
                 else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
