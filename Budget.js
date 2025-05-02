@@ -288,7 +288,7 @@ var doGet = function (e) {
                 }
                 else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
                 console.log("No string:", <?!= appL["app"] ?>);
-                  laApp.innerHTML = <?= JSON.stringify(appL["app"] ?>);
+                  laApp.innerHTML = <?= JSON.stringify(appL["app"]) ?>);
                   setDefaultUrl()
                 }
                 else {
