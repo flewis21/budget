@@ -256,15 +256,15 @@ var doGet = function (e) {
               </div>
               <script>
                 var indexBeta = document.getElementById("indexBeta");
-                console.log("iframe :", indexBeta);
+                console.log("iframe :", indexBeta.src);
                 function setDefaultUrl() {
                   indexBeta.src 
                   = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
                 }
                 var laApp = document.getElementById("appLApp");
-                console.log("div below iframe:", laApp);
-                var testApp = <?!= appL ?>
-                console.log("doGet result:", testApp);
+                console.log("div below iframe:", laApp.innerHTML);
+                var testApp = <?!= JSON.stringify(appL) ?>
+                console.log("doGet result:", JSON.stringify(testApp));
                 if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string") {
                   var testAppRes = testApp["app"];
                 console.log("Object + String and returns app:", testAppRes);
