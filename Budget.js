@@ -276,14 +276,14 @@ var doGet = function (e) {
                        try {
                         console.log("String but not source:", <?!= JSON.stringify(appL["app"]) ?>);
                         document.getElementById("coApp").innerHTML 
-                        = <?!= HtmlService.createTemplate(JSON.stringify(appL["app"])).evaluate().getContent(); ?>
+                        = <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent(); ?>
                        }
                         catch(e) {
                           console.error("Error setting coApp innerHTML:", e);
                         };
                       }
                   console.log("String but no Source or Markup:", <?!= appL["app"] ?>);
-                  laApp.innerHTML = <?!= HtmlService.createTemplate(JSON.stringify(appL["app"])).evaluate().getContent() ?>;
+                  laApp.innerHTML = <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
                     }
                   else {
                     indexBeta.src 
