@@ -260,7 +260,7 @@ var doGet = function (e) {
                   var laApp = document.getElementById("appLApp");
                   var defaultUrl = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
                   console.log("doGet result (appL):", <?!= JSON.stringify(appL) ?>);
-                  if (<?!= JSON.stringify(appL) && typeof JSON.stringify(appL) === "object" && JSON.stringify(appL).hasOwnProperty("app") && typeof JSON.stringify(appL["app"]) === "string" && typeof JSON.stringify(appL["app"]) !== "undefined" ?>) {
+                  if (<?!= appL && typeof appL === "object" && appL.hasOwnProperty("app") && typeof JSON.stringify(appL["app"]) === "string" && typeof JSON.stringify(appL["app"]) !== "undefined" ?>) {
                     var testAppRes = <?!= JSON.stringify(appL["app"]) ?>;
                     var testAppIndex = <?!= JSON.stringify(appL["index"]) ?>
                     console.log("Object + String and returns appL['app']:", <?!= JSON.stringify(appL["app"]) ?>);
