@@ -263,12 +263,12 @@ var doGet = function (e) {
                   if (<?!= JSON.stringify(appL) && typeof JSON.stringify(appL) === "object" && JSON.stringify(appL).hasOwnProperty("app") && typeof JSON.stringify(appL["app"]) === "string" && typeof JSON.stringify(appL["app"]) !== "undefined" ?>) {
                     var testAppRes = <?!= JSON.stringify(appL["app"]) ?>;
                     var testAppIndex = <?!= JSON.stringify(appL["index"]) ?>
-                    console.log("Object + String and returns appL['app']:", testAppRes);
-                    console.log("Test appL['app'] length:", testAppRes.length); 
-                    laApp.innerHTML =  <?!= HtmlService.createTemplate(testAppRes).evaluate().getContent() ?>;
-                    if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
+                    console.log("Object + String and returns appL['app']:", <?!= JSON.stringify(appL["app"]) ?>);
+                    console.log("Test appL['app'] length:", <?!= JSON.stringify(appL["app"]).length ?>); 
+                    laApp.innerHTML =  <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
+                    if (<?!= JSON.stringify(appL["app"]).length === 83 || JSON.stringify(appL["app"]).length === 94 || JSON.stringify(appL["app"]).length === 97 || JSON.stringify(appL["app"]).length === 99 || JSON.stringify(appL["app"]).length === 101 || JSON.stringify(appL["app"]).length === 103 || JSON.stringify(appL["app"]).length === 136 || JSON.stringify(appL["app"]).length === 132 ?>) {
                       indexBeta.src 
-                      = testAppRes;
+                      = JSON.stringify(appL["app"]);
                     }
                   else {
                     indexBeta.src 
