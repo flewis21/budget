@@ -261,7 +261,7 @@ var doGet = function (e) {
                   var testApp = <?!= appL ?>;
                   var defaultUrl = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
                   console.log("doGet result (appL):", <?= JSON.stringify(appL) ?>);
-                  if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string") {
+                  if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string" && typeof testApp["app"] !== "undefined") {
                     var testAppRes = testApp["app"];
                     console.log("Object + String and returns appL['app']:", testAppRes);
                     console.log("Test appL['app'] length:", testAppRes.length); 
