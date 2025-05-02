@@ -277,17 +277,17 @@ var doGet = function (e) {
                     indexBeta.src 
                        = <?= JSON.stringify(appL["index"]) ?>
                        try {
-                console.log("String but not source:", <?= appL["app"] ?>);
+                console.log("String but not source:", <?!= appL["app"] ?>);
                       document.getElementById("coApp").innerHTML 
-                      = <?= HtmlService.createTemplate(appL["app"]).evaluate().getContent(); ?>
+                      = <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent(); ?>
                      };
                   }
-                console.log("String but no Source or Markup:", <?= appL["app"] ?>);
-                  laApp.innerHTML = <?= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
+                console.log("String but no Source or Markup:", <?!= appL["app"] ?>);
+                  laApp.innerHTML = <?!= HtmlService.createTemplate(appL["app"]).evaluate().getContent() ?>;
                   setDefaultUrl()
                 }
                 else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
-                console.log("No string:", <?= appL["app"] ?>);
+                console.log("No string:", <?!= appL["app"] ?>);
                   laApp.innerHTML = <?= JSON.stringify(appL["app"] ?>);
                   setDefaultUrl()
                 }
