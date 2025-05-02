@@ -256,7 +256,6 @@ var doGet = function (e) {
               </div>
               <script>
                 var indexBeta = document.getElementById("indexBeta");
-                document.addEventListener("DOMContentLoaded", setDefaultUrl)
                 function setDefaultUrl() {
                   var laApp = document.getElementById("appLApp");
                   var testApp = <?!= appL ?>;
@@ -294,7 +293,8 @@ var doGet = function (e) {
                     console.log("No string:", <?!= appL["app"] ?>);
                     laApp.innerHTML = <?= JSON.stringify(appL["app"]) ?>);
                   }
-                }</script>
+                }
+                document.addEventListener("DOMContentLoaded", setDefaultUrl);</script>
             </body>
           </html>`,
             {
