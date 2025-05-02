@@ -255,42 +255,36 @@ var doGet = function (e) {
                 <div class="container" id="appLApp"></div>
               </div>
               <script>
+                var indexBeta = document.getElementById("indexBeta");
+                function setDefaultUrl() {
+                  indexBeta.src 
+                  = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                }
                 var laApp = document.getElementById("appLApp")
                 var testApp = <?!= appL ?>
-                if (testApp) {
-                  if (typeof testApp === "object") {
-                    if (testApp.hasOwnProperty("app")) {
-                      var testAppRes = testApp["app"]
-                      if (typeof testAppRes === "string") {
-                        laApp.innerHTML = HtmlService.createTemplate(testAppRes).evaluate().getContent();
-                        console.log('appL["app"] length:', testAppRes.length);
-                        if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
-                          document.getElementById("indexBeta").src 
-                          = testAppRes
-                        }
-                        else {
-                          try {
-                            document.getElementById("coApp").innerHTML 
-                            = HtmlService.createTemplate(testAppRes).evaluate().getContent();
-                           };document.getElementById("indexBeta").src 
-                             = testApp["index"]
-                        } 
-                      }
-                      else {
-                        laApp.innerHTML = JSON.stringify(testAppRes);
-                        document.getElementById("indexBeta").src 
-                      = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
-                        }
-                      }
-                    }
-                    else {
-                      document.getElementById("indexBeta").src 
-                    = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
-                  }
+                if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string") {
+                  var testAppRes = testApp["app"];
+                  console.log("Test App Result's length:", testAppRes.length); 
+                  if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
+                    indexBeta.src 
+                    = testAppRes
                   }
                   else {
-                    document.getElementById("indexBeta").src 
-                  = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                    indexBeta.src 
+                       = testApp["index"]
+                       try {
+                      document.getElementById("coApp").innerHTML 
+                      = HtmlService.createTemplate(testApp["app"]).evaluate().getContent();
+                     };
+                  }
+                  laApp.innerHTML = HtmlService.createTemplate(testAppRes).evaluate().getContent();
+                }
+                else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
+                  laApp.innerHTML = JSON.stringify(testApp["app"]);
+                  setDefaultUrl()
+                }
+                else {
+                  setDefaultUrl()
                 }</script>
             </body>
           </html>`,
