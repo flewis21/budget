@@ -262,16 +262,17 @@ var doGet = function (e) {
                   console.log("doGet result (appL):", <?!= JSON.stringify(appL) ?>);
                   if (<?!= JSON.stringify(appL) && typeof JSON.stringify(appL) === "object" && JSON.stringify(appL).hasOwnProperty("app") && typeof JSON.stringify(appL["app"]) === "string" && typeof JSON.stringify(appL["app"]) !== "undefined" ?>) {
                     var testAppRes = <?!= JSON.stringify(appL["app"]) ?>;
+                    var testAppIndex = <?!= JSON.stringify(appL["index"]) ?>
                     console.log("Object + String and returns appL['app']:", testAppRes);
                     console.log("Test appL['app'] length:", testAppRes.length); 
-                    laApp.innerHTML =  <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent() ?>;
+                    laApp.innerHTML =  <?!= HtmlService.createTemplate(testAppRes).evaluate().getContent() ?>;
                     if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
                       indexBeta.src 
                       = testAppRes;
                     }
                   else {
                     indexBeta.src 
-                       = <?= appL["index"] ?>;
+                       = testAppIndex;
                        try {
                         console.log("String but not source:", testAppRes);
                         document.getElementById("coApp").innerHTML 
@@ -288,9 +289,11 @@ var doGet = function (e) {
                     indexBeta.src 
                     = defaultUrl;
                   }
-                  if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
-                    console.log("No string:", <?!= appL["app"] ?>);
-                    laApp.innerHTML = <?= appL["app"] ?>);
+                  if (<?!= JSON.stringify(appL) && typeof JSON.stringify(appL) === "object" && JSON.stringify(appL).hasOwnProperty("app") && typeof JSON.stringify(appL["app"]) !== "string" && typeof JSON.stringify(appL["app"]) !== "undefined" ?>) {
+                    var testAppRes = <?!= JSON.stringify(appL["app"]) ?>;
+                    var testAppIndex = <?!= JSON.stringify(appL["index"]) ?>
+                    console.log("No string:", testAppRes);
+                    laApp.innerHTML = testAppRes);
                   }
                 }
                 document.addEventListener("DOMContentLoaded", setDefaultUrl);</script>
