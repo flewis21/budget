@@ -272,18 +272,18 @@ var doGet = function (e) {
                     }
                   else {
                     indexBeta.src 
-                       = testAppIndex;
+                       = <?!= JSON.stringify(appL["index"]) ?>;
                        try {
-                        console.log("String but not source:", testAppRes);
+                        console.log("String but not source:", <?!= JSON.stringify(appL["app"]) ?>);
                         document.getElementById("coApp").innerHTML 
-                        = HtmlService.createTemplate(testAppRes).evaluate().getContent();
+                        = HtmlService.createTemplate(<?!= JSON.stringify(appL["app"]) ?>).evaluate().getContent();
                        }
                         catch(e) {
                           console.error("Error setting coApp innerHTML:", e);
                         };
                       }
                   console.log("String but no Source or Markup:", <?!= appL["app"] ?>);
-                  laApp.innerHTML = <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent() ?>;
+                  laApp.innerHTML = <?!= HtmlService.createTemplate(<?!= JSON.stringify(appL["app"]) ?>).evaluate().getContent() ?>;
                     }
                   else {
                     indexBeta.src 
@@ -292,8 +292,8 @@ var doGet = function (e) {
                   if (<?!= JSON.stringify(appL) && typeof JSON.stringify(appL) === "object" && JSON.stringify(appL).hasOwnProperty("app") && typeof JSON.stringify(appL["app"]) !== "string" && typeof JSON.stringify(appL["app"]) !== "undefined" ?>) {
                     var testAppRes = <?!= JSON.stringify(appL["app"]) ?>;
                     var testAppIndex = <?!= JSON.stringify(appL["index"]) ?>
-                    console.log("No string:", testAppRes);
-                    laApp.innerHTML = testAppRes);
+                    console.log("No string:", <?!= JSON.stringify(appL["app"]) ?>);
+                    laApp.innerHTML = <?!= JSON.stringify(appL["app"]) ?>;
                   }
                 }
                 document.addEventListener("DOMContentLoaded", setDefaultUrl);</script>
