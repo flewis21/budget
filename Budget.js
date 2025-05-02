@@ -278,6 +278,7 @@ var doGet = function (e) {
                      };
                   }
                   laApp.innerHTML = HtmlService.createTemplate(testAppRes).evaluate().getContent();
+                  setDefaultUrl()
                 }
                 else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
                   laApp.innerHTML = JSON.stringify(testApp["app"]);
