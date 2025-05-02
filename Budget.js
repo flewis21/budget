@@ -256,40 +256,43 @@ var doGet = function (e) {
               </div>
               <script>
                 var indexBeta = document.getElementById("indexBeta");
-                console.log("iframe :", indexBeta.src);
                 document.addEventListener("DOMContentLoaded", setDefaultUrl)
                 function setDefaultUrl() {
                   var laApp = document.getElementById("appLApp");
-                  console.log("div below iframe:", laApp.innerHTML);
-                  var testApp = <?!= appL ?>
-                  console.log("doGet result:", <?= JSON.stringify(appL) ?>);
+                  var testApp = <?!= appL ?>;
+                  var defaultUrl = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                  console.log("doGet result (appL):", <?= JSON.stringify(appL) ?>);
                   if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string") {
-                    var testAppRes = <?!= appL["app"] ?>;
-                    console.log("Object + String and returns app:", <?!= appL["app"] ?>);
-                    console.log("Test App Result's length:", <?!= appL["app"].length ?>); 
+                    var testAppRes = testApp["app"];
+                    console.log("Object + String and returns appL['app']:", testAppRes);
+                    console.log("Test appL['app'] length:", testAppRes.length); 
+                    laApp.innerHTML =  <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent() ?>;
                     if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
                       indexBeta.src 
-                      = <?= JSON.stringify(appL["app"]) ?>
+                      = testAppRes;
                     }
                   else {
                     indexBeta.src 
-                       = <?= JSON.stringify(appL["index"]) ?>
+                       = <?= JSON.stringify(appL["index"]) ?>;
                        try {
-                        console.log("String but not source:", <?!= appL["app"] ?>);
+                        console.log("String but not source:", testAppRes);
                         document.getElementById("coApp").innerHTML 
-                        = <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent(); ?>
-                       };
+                        = HtmlService.createTemplate(testAppRes).evaluate().getContent();
+                       }
+                        catch(e) {
+                          console.error("Error setting coApp innerHTML:", e);
+                        };
                       }
                   console.log("String but no Source or Markup:", <?!= appL["app"] ?>);
                   laApp.innerHTML = <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent() ?>;
                     }
-                  else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
-                    console.log("No string:", <?!= appL["app"] ?>);
-                    laApp.innerHTML = <?= JSON.stringify(appL["app"]) ?>);
-                  }
                   else {
                     indexBeta.src 
-                    = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
+                    = defaultUrl;
+                  }
+                  if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
+                    console.log("No string:", <?!= appL["app"] ?>);
+                    laApp.innerHTML = <?= JSON.stringify(appL["app"]) ?>);
                   }
                 }</script>
             </body>
