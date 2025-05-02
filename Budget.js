@@ -256,14 +256,18 @@ var doGet = function (e) {
               </div>
               <script>
                 var indexBeta = document.getElementById("indexBeta");
+                console.log("iframe :", indexBeta);
                 function setDefaultUrl() {
                   indexBeta.src 
                   = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
                 }
-                var laApp = document.getElementById("appLApp")
+                var laApp = document.getElementById("appLApp");
+                console.log("div below iframe:", laApp);
                 var testApp = <?!= appL ?>
+                console.log("doGet result:", testApp);
                 if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string") {
                   var testAppRes = testApp["app"];
+                console.log("Object + String and returns app:", testAppRes);
                   console.log("Test App Result's length:", testAppRes.length); 
                   if (testAppRes.length === 83 || testAppRes.length === 94 || testAppRes.length === 97 || testAppRes.length === 99 || testAppRes.length === 101 || testAppRes.length === 103 || testAppRes.length === 136 || testAppRes.length === 132) {
                     indexBeta.src 
@@ -273,14 +277,17 @@ var doGet = function (e) {
                     indexBeta.src 
                        = testApp["index"]
                        try {
+                console.log("String but not source:", testApp["app"]);
                       document.getElementById("coApp").innerHTML 
                       = HtmlService.createTemplate(testApp["app"]).evaluate().getContent();
                      };
                   }
+                console.log("String but no Source or Markup:", testAppRes);
                   laApp.innerHTML = HtmlService.createTemplate(testAppRes).evaluate().getContent();
                   setDefaultUrl()
                 }
                 else if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] !== "string") {
+                console.log("No string:", testApp["app"]);
                   laApp.innerHTML = JSON.stringify(testApp["app"]);
                   setDefaultUrl()
                 }
