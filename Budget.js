@@ -263,7 +263,7 @@ var doGet = function (e) {
                 }
                 var laApp = document.getElementById("appLApp");
                 console.log("div below iframe:", laApp.innerHTML);
-                var testApp = <?!= JSON.stringify(appL) ?>
+                var testApp = <?= JSON.stringify(appL) ?>
                 console.log("doGet result:", <?= JSON.stringify(appL) ?>);
                 if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string") {
                   var testAppRes = <?!= appL["app"] ?>;
