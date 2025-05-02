@@ -258,11 +258,10 @@ var doGet = function (e) {
                 var indexBeta = document.getElementById("indexBeta");
                 function setDefaultUrl() {
                   var laApp = document.getElementById("appLApp");
-                  var testApp = <?!= JSON.parse(JSON.stringify(appL)) ?>;
                   var defaultUrl = "https://www.clubhouse.com/@fabianlewis?utm_medium=ch_profile&utm_campaign=lhTUtHb2bYqPN3w8EEB7FQ-247242";
                   console.log("doGet result (appL):", <?!= appL ?>);
-                  if (testApp && typeof testApp === "object" && testApp.hasOwnProperty("app") && typeof testApp["app"] === "string" && typeof testApp["app"] !== "undefined") {
-                    var testAppRes = testApp["app"];
+                  if (<?!= appL && typeof appL === "object" && appL.hasOwnProperty("app") && typeof appL["app"] === "string" && typeof appL["app"] !== "undefined" ?>) {
+                    var testAppRes = <?!= appL["app"] ?>;
                     console.log("Object + String and returns appL['app']:", testAppRes);
                     console.log("Test appL['app'] length:", testAppRes.length); 
                     laApp.innerHTML =  <?!= HtmlService.createTemplate(appL["app"].toString()).evaluate().getContent() ?>;
