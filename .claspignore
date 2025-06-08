@@ -1,0 +1,7 @@
+.git/
+node_modules/
+package*.json
+/lambda
+/lambda/node_modules
+dist/
+build/
