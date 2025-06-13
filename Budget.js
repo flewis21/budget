@@ -37,7 +37,7 @@ var doGet = function (e) {
             ["action", "getData"],
           ],
         ],
-        Math.floor((this[libName].maxTime - (new Date() % (1000 * 60))) / 1000),
+        functionRegistry.time,
       );
       console.log(JSON.stringify(e));
     }
@@ -45,7 +45,7 @@ var doGet = function (e) {
 
   // Logging
   console.log(
-    Math.floor((this[libName].maxTime - (new Date() % (1000 * 60))) / 1000) +
+    functionRegistry.time +
       "\n" +
       arguments.callee.name +
       "\ne is !" +
@@ -69,7 +69,11 @@ var doGet = function (e) {
     let rawFuncResult = null;
     if (this[libName] && typeof this[libName][funcUno] === "function") {
       let parsedFuncArgs = [];
-      if (funcDos) {
+
+      // Check if funcDos is already an array (from internal re-assignment by objectOfS)
+      if (Array.isArray(funcDos)) {
+        parsedFuncArgs = funcDos; // It's already the array we want
+      } else if (typeof funcDos === "string" && funcDos) {
         try {
           parsedFuncArgs = JSON.parse(funcDos);
           if (!Array.isArray(parsedFuncArgs)) {
@@ -78,6 +82,9 @@ var doGet = function (e) {
         } catch (jsonError) {
           parsedFuncArgs = [funcDos]; // Treat as a single string argument if not valid JSON
         }
+      } else {
+        // Handle other cases for funcDos, or it might be null/undefined
+        finalArgsForFunction = [];
       }
       rawFuncResult = this[libName][funcUno].apply(this, parsedFuncArgs);
     } else {
@@ -311,11 +318,74 @@ var doGet = function (e) {
           align-content: flex-start;
           overflow: auto;
         }
+        #jsonInput {
+          display: none;
+          width: 100%;
+          height: 8vh; /* Or whatever height you need */
+          margin:10px auto;
+          padding: 0px;
+          box-sizing: border-box; /* Include padding in width/height */
+          border:1px solid #ccc;
+          font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace'; /* Monospaced font is crucial */
+          font-size: 14px;
+          line-height: 1.5; /* Good for readability */
+          white-space:pre-wrap;
+          text-align:left;
+          background-color: #282c34; /* Dark background common for code editors */
+          color: #abb2bf; /* Light text color for contrast */
+          resize: vertical; /* Allow vertical resizing, or 'none' to disable */
+          overflow: auto; /* Enable scrolling if content exceeds height */
+
+
+          /* Focus state */
+          outline: none; /* Remove default blue outline on focus */
+          box-shadow: 0 0 0 2px rgba(97, 175, 239, 0.5); /* Custom focus highlight */
+          transition: box-shadow 0.2s ease-in-out;
+        }
+        /* Style for the new textarea */
+        #indexBeta {
+          /* Basic layout and appearance */
+          width: 100%;
+          height: 25vh; /* Or whatever height you need */
+          font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'monospace'; /* Monospaced font is crucial */
+          font-size: 14px;
+          line-height: 1.5; /* Good for readability */
+          margin:10px auto;
+          white-space:pre-wrap;
+          text-align:left;
+          padding: 0px;
+          box-sizing: border-box; /* Include padding in width/height */
+          border: 1px solid #333;
+          background-color: #282c34; /* Dark background common for code editors */
+          color: #abb2bf; /* Light text color for contrast */
+          resize: vertical; /* Allow vertical resizing, or 'none' to disable */
+          overflow: auto; /* Enable scrolling if content exceeds height */
+
+          /* Hide default textarea scrollbar (optional, but common for custom scrollbars) */
+          /* If you hide this, you'd need to implement custom scrollbars with JavaScript */
+          /* -webkit-overflow-scrolling: touch; */ /* For smooth scrolling on touch devices */
+          /* &::-webkit-scrollbar { display: none; } */
+          /* & { -ms-overflow-style: none; scrollbar-width: none; } */
+
+
+          /* Focus state */
+          outline: none; /* Remove default blue outline on focus */
+          box-shadow: 0 0 0 2px rgba(97, 175, 239, 0.5); /* Custom focus highlight */
+          transition: box-shadow 0.2s ease-in-out;
+        };
+
+        #indexBeta,#jsonInput:focus {
+            box-shadow: 0 0 0 2px rgba(97, 175, 239, 0.8); /* More prominent on focus */
+        }
+
+        /* Optional: Placeholder styling */
+        #indexBeta,#jsonInput::placeholder {
+            color: #616e7f;
+        }
       </style>
     </head>
     <body>
-      <div id="pageObj"></div>
-      <textarea id="jsonInput" style="display: none;width: 80%;min-height: 200px;margin:10px auto;padding:10px;border:1px solid #ccc;font-family:monospace;white-space:pre-wrap;text-align:left;"></textarea>
+      <div id="eObject"><input type="text" id="pageObj" value="" name="eObject" style="display: none"></div>
       <div>
         <?!= renBlob ?>
       </div>
@@ -336,46 +406,89 @@ var doGet = function (e) {
             .runBoilerplate(func, args)
         });
       };
+      function clientSide(func, args) {
+        return new Promise((resolve, reject) => {
+          google.script.run
+            .withSuccessHandler((result) => {
+              resolve(result); // result will be { type: "...", data: "..." }
+              console.log("Client-side: Page re-rendered with new content from server.");
+            })
+            .withFailureHandler((error) => {
+              console.log(error);
+              console.error("Client-side Error during full re-render:", error);
+              alert("Error re-rendering: " + error.message);
+              reject(error);
+            })
+            .runRenderPageWithNewE(func, args)
+        });
+      };
       var objUrl = document.getElementById("pageObj");
-      var jsonInput = document.getElementById("jsonInput");
-      var currentE = <?= JSON.stringify(e) ?>; // Correctly embed e object as JSON
+      const currentE = JSON.parse(<?= e ?>);
+      const homePageUrl = <?= homePage ?>;
+
+      console.log("Client-side: Initial doGet event object:", currentE);
+      console.log("Client-side: Home Page URL:", homePageUrl);
+
+      console.log("line 261");document.addEventListener("DOMContentLoaded", eRun);
       document.addEventListener("DOMContentLoaded", eRun)
       function eRun() {
-        objUrl.innerHTML = <?= JSON.stringify(e) ?>;
-        jsonInput.style.display = "block";
-        jsonInput.value = <?= JSON.stringify(e, null, 2) ?>;
+        let initialArgs = currentE.parameter["args"];
+        if (initialArgs !== undefined && initialArgs !== null) {
+            if (typeof initialArgs === 'object') {
+                objUrl.value = JSON.stringify(initialArgs, null, 2);
+            }
+            else {
+                objUrl.value = initialArgs; // If it's a string directly
+            }
+        }
+        else {
+            objUrl.value = '[""]'; // Default if args is missing
+        }
+        objUrl.addEventListener("change", function() {
+          // Parse the user's input as the new 'args' value
+          // Allow direct strings or JSON arrays/objects
+          let parsedE;
+            try {
+              parsedE = JSON.parse(this.value);
+            } 
+            catch (jsonError) {
+              // If it's not valid JSON, treat it as a plain string
+              parsedE = this.value;
+            }
+
+            // Create a *copy* of the original currentE
+            const updatedClientE = JSON.parse(JSON.stringify(currentE));
+
+            // Update ONLY the 'args' parameter
+            updatedClientE.parameter["args"] = parsedE;
+
+            alert("e object updated (check the console). You would now typically send this back to the server.");
+            console.log("Updated e object:", objUrl.value);
+            serverSide(updatedClientE.parameter["func"], [updatedClientE.parameter["args"]]).then(validationResult => {
+              console.log("Actual validation result: " + JSON.stringify(validationResult));
+              if (validationResult.app) { // Assumes validationResult has an 'app' property
+                alert("e object validated successfully on the server");
+                var textRes = <?= homePage ?> + "?func=" + updatedClientE.parameter["func"] + "&args=" + updatedClientE.parameter["args"];
+                window.open(textRes);
+              } else {
+                alert("Server validation failed: Unknown error");
+                console.error("Server validation failed:", validationResult);
+              }
+            }).catch(error => {
+              if (updatedClientE.parameter["action"]) {
+                alert("e object action required on the server");
+                var textRes = <?= homePage ?> + "?action=" + updatedClientE.parameter["action"] + "&func=" + updatedClientE.parameter["func"] + "&args=" + updatedClientE.parameter["args"];
+                window.open(textRes);
+              }
+              alert("Error during server validation: " + error);
+              console.error("Server validation error:", error)
+            });
+          } catch(error) {
+            alert("Error parsing JSON. Please ensure the input is valid JSON.");
+            console.error("JSON parsing error:", error);
+          };
+        });
       };
-      jsonInput.addEventListener("change", function() {
-        try {
-          var parsedE = JSON.parse(jsonInput.value);
-          alert("e object updated (check the console). You would now typically send this back to the server.");
-          console.log("Updated e object:", parsedE);
-          serverSide(parsedE.parameter["func"], [parsedE.parameter["args"]]).then(validationResult => {
-            console.log("Actual validation result: " + JSON.stringify(validationResult));
-            if (validationResult.app) { // Assumes validationResult has an 'app' property
-              alert("e object validated successfully on the server");
-              currentE = parsedE;
-              var textRes = <?= homePage ?> + "?func=" + currentE.parameter["func"] + "&args=" + currentE.parameter["args"];
-              window.open(textRes);
-            } else {
-              alert("Server validation failed: Unknown error");
-              console.error("Server validation failed:", validationResult);
-            }
-          }).catch(error => {
-            if (parsedE.parameter["action"]) {
-              alert("e object action required on the server");
-              currentE = parsedE;
-              var textRes = <?= homePage ?> + "?action=" + currentE.parameter["action"] + "&func=" + currentE.parameter["func"] + "&args=" + parsedE.parameter["args"];
-              window.open(textRes);
-            }
-            alert("Error during server validation: " + error);
-            console.error("Server validation error:", error)
-          });
-        } catch(error) {
-          alert("Error parsing JSON. Please ensure the input is valid JSON.");
-          console.error("JSON parsing error:", error);
-        };
-      });
       </script>
     </html>`,
     {
@@ -406,38 +519,6 @@ var doGet = function (e) {
           <body>
             <div id="coApp" style='display:"block";background-color: #ffc107;'>
               <?!= finalAppLContent ?>
-            </div>
-            <div class="container">
-              <?!= HtmlService.createTemplateFromFile(tupL).evaluate().getContent() ?>
-            </div>
-            <div id="indexDiv" class="row responsive-section" style='display: "none"'>
-              <div class="col s12 l12 m12 card-panel container push-l1" style="background-color: #ffc107;">
-                <div class="">
-                  <iframe
-                    class="z-depth-5 card-panel deep-purple darken-1 scale-transition scale-out scale-in btn-large"
-                    src='<?= iframeSrc ?>'
-                    id="indexBeta"
-                    style="width:100%;height:50vh;border:0"
-                    allow="autoplay"
-                    allow="encrypted-media"
-                    title="Dontime Life Website"
-                    frameborder="0"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-            <div id="feedDiv" class="row responsive-section" style='display:"block"'>
-              <div class="col s12 l12 m12 card-panel container push-l1" id="appLApp" style="background-color: #ffc107;">
-                <?!= finalFeedDivContent ?>
-              </div>
-            </div>
-            <script>
-              this.window.onload = function() {
-                var frameD = document.getElementById("indexBeta").src;
-                document.getElementById("indexDiv").style.display = frameD? "block":"none"
-              };
-            </script>
           </body>
         </html>`,
         {
