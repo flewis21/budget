@@ -5,3 +5,5 @@ package*.json
 /lambda/node_modules
 dist/
 build/
+index.htm
+index.html
