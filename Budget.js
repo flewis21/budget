@@ -73,7 +73,7 @@ var doGet = function (e) {
       // Check if funcDos is already an array (from internal re-assignment by objectOfS)
       if (Array.isArray(funcDos)) {
         parsedFuncArgs = funcDos; // It's already the array we want
-      } else if (typeof funcDos === 'string' && funcDos) {
+      } else if (typeof funcDos === "string" && funcDos) {
         try {
           parsedFuncArgs = JSON.parse(funcDos);
           if (!Array.isArray(parsedFuncArgs)) {
@@ -86,7 +86,7 @@ var doGet = function (e) {
         // Handle other cases for funcDos, or it might be null/undefined
         finalArgsForFunction = [];
       }
-        rawFuncResult = this[libName][funcUno].apply(this, parsedFuncArgs);
+      rawFuncResult = this[libName][funcUno].apply(this, parsedFuncArgs);
     } else {
       console.error(
         `Error: Function "${funcUno}" not found or not callable in "${libName}".`,
@@ -219,50 +219,42 @@ var doGet = function (e) {
       iframeSrc = payLoad.index; // Assign iframeSrc
       finalAppLContent = payLoad.data;
       finalFeedDivContent = `URL provided: <a href="${payLoad.link}" target="_blank">${payLoad.link}</a>`;
-    } 
-    else if (payLoad.type === "url") {
+    } else if (payLoad.type === "url") {
       // --- NEW: Handle "url" type directly ---
       iframeSrc = payLoad.data; // Assign the URL to iframeSrc
       finalAppLContent = `URL provided: <a href="${payLoad.index}" target="_blank">${payLoad.index}</a>`;
       finalFeedDivContent = `URL provided: <a href="${payLoad.link}" target="_blank">${payLoad.link}</a>`;
-    } 
-    else if (payLoad.type === "jsonData") {
+    } else if (payLoad.type === "jsonData") {
       iframeSrc = payLoad.index; // Assign iframeSrc
       finalAppLContent = `<pre>${JSON.stringify(payLoad.data, null, 2)}</pre>`;
       finalFeedDivContent = `URL provided: <a href="${payLoad.link}" target="_blank">${payLoad.link}</a>`;
-    } 
-    else if (payLoad.type === "text") {
+    } else if (payLoad.type === "text") {
       iframeSrc = payLoad.index; // Assign iframeSrc
       finalAppLContent = payLoad.data;
       finalFeedDivContent = `URL provided: <a href="${payLoad.link}" target="_blank">${payLoad.link}</a>`;
-    } 
-    else if (payLoad.type === "object") {
+    } else if (payLoad.type === "object") {
       // Here, if payLoad.data is an object, you need to decide how to display it.
       // It could contain sub-properties you want to render.
       if (payLoad.data.html || payLoad.data.app) {
         finalAppLContent = payLoad.data.html || payLoad.data.app;
         // If the object itself contains a URL, use it for iframeSrc
         iframeSrc = payLoad.data.url || iframeSrc;
-      } 
-      else if (payLoad.data.url) {
+      } else if (payLoad.data.url) {
         // If the object explicitly has a 'url' property
         iframeSrc = payLoad.data.url;
         finalAppLContent = `URL provided: <a href="${payLoad.data.index}" target="_blank">${payLoad.data.index}</a>`;
         finalFeedDivContent = `URL provided: <a href="${payLoad.data.link}" target="_blank">${payLoad.data.link}</a>`;
-      } 
-      else {
+      } else {
         // Default way to display a generic object: stringify it
         iframeSrc = payLoad.data.index; // Assign iframeSrc
         finalAppLContent = `<pre>${JSON.stringify(payLoad.data.app, null, 2)}</pre>`;
         finalFeedDivContent = `URL provided: <a href="${payLoad.data.link}" target="_blank">${payLoad.data.link}</a>`;
       }
-    } 
-    else if (payLoad.type === "unknown" || payLoad.type === "error") {
+    } else if (payLoad.type === "unknown" || payLoad.type === "error") {
       finalAppLContent = `<div>Error: ${payLoad.message || payLoad.data || "Unknown error."}</div>`;
       finalFeedDivContent = `Error: ${payLoad.message || payLoad.data || "Unknown error."}`;
     }
-  } 
-  catch (error) {
+  } catch (error) {
     console.error(`Error during payload processing:`, error);
     finalAppLContent = `<div>Critical Error: ${error.message}</div>`;
     finalFeedDivContent = `Critical Error: ${error.message}`;
