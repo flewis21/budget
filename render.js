@@ -1,7 +1,7 @@
 const functionRegistry = {
   fileList: [],
   paramsList: [],
-  initialize: function () {
+  initialize: function() {
     for (const key in globalThis) {
       if (typeof globalThis[key] === "function") {
         this.fileList.push(key);
@@ -10,34 +10,32 @@ const functionRegistry = {
           const params = funcString
             .substring(funcString.indexOf("(") + 1, funcString.indexOf(")"))
             .split(",")
-            .map((param) => param.trim())
-            .filter((param) => param !== "");
+            .map(param => param.trim())
+            .filter(param => param !== "");
           this.paramsList.push({ name: key, parameters: params });
         } catch (e) {
           Logger.log(`Error processing function: ${key}. Error: ${e}`);
-          this.paramsList.push({
-            name: key,
-            parameters: ["(Unable to parse)"],
-          });
+          this.paramsList.push({ name: key, parameters: ["(Unable to parse)"] });
         }
       }
     }
   },
-  getFileList: function () {
+  getFileList: function() {
     return this.fileList;
   },
-  getParamsList: function () {
+  getParamsList: function() {
     return this.paramsList;
   },
-  maxTime: 6 * 60 * 1000,
-  get time() {
+  maxTime: 
+  6 * 60 * 1000,
+  get time(){ 
     return Math.floor(
-      (this.maxTime - (new Date().getTime() % (1000 * 60))) / 1000,
-    );
+          (this.maxTime - (new Date().getTime() % (1000 * 60))) / 1000
+        );
   },
-};
-
-var renderFile = function (file, argsObject) {
+}
+  
+  var renderFile = function (file, argsObject) {
   if (file) {
     const tmp = HtmlService.createTemplateFromFile(file);
     if (argsObject) {
