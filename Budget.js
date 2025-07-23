@@ -265,7 +265,7 @@ var doGet = function (e) {
   var foobarr = funcUno || "renderFile"; // Still using this, ensure it's a function name string
   var libFunc = foobarr; // Redundant variable
   var htmlArray = [
-    `index proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
+    `untitled proMedia epaWebsite callBack oddChances jsGame checkOnDay uiAccess popUpOpen congressLeg congressMembers jFundamentals gnuFree myGNUFreeJS Section3.Challenge1 cors edgarFriendly editor ssForms styling theRoll theWorks uiAccess cGWI`,
   ]
     .toString()
     .split(" ");
