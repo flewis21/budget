@@ -42,6 +42,7 @@
           } else {
             responseData = await response.text();
           }
+          document.location.href = responseData.message.content;
           document.getElementById("data-display").textContent = JSON.stringify(
             responseData,
             null,
