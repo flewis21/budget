@@ -45,6 +45,9 @@
           if (responseData.message.content.url) {
             document.location.href = responseData.message.content.url;
             return;
+          } else if (responseData.message.content) {
+            document.location.href = responseData.message.content;
+            return;
           } else {
             document.getElementById("data-display").textContent =
               JSON.stringify(responseData, null, 2);
