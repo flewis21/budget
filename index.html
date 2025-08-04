@@ -44,14 +44,10 @@
           }
           if (responseData.message.content.url) {
             document.location.href = responseData.message.content.url;
-            return 
-          } 
-          else {
-            document.getElementById("data-display").textContent = JSON.stringify(
-              responseData,
-              null,
-              2,
-            );
+            return;
+          } else {
+            document.getElementById("data-display").textContent =
+              JSON.stringify(responseData, null, 2);
           }
         } catch (error) {
           console.error("Error fetching data:", error);
