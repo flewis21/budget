@@ -356,7 +356,7 @@ var doGet = function (e) {
           padding: 0px;
           box-sizing: border-box; /* Include padding in width/height */
           border: 1px solid #333;
-          background-color: #282c34; /* Dark background common for code editors */
+          background-color: #bfb8ab; /* Dark background common for code editors */
           color: #abb2bf; /* Light text color for contrast */
           resize: vertical; /* Allow vertical resizing, or 'none' to disable */
           overflow: auto; /* Enable scrolling if content exceeds height */
