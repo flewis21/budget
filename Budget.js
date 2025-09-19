@@ -10,7 +10,7 @@ var doGet = function (e) {
   var funcTres = e && e.parameter["file"] ? e.parameter["file"] : "uiAccess";
 
   // Logging
-  if (e && e.parameter["func"]) {
+  if (e && (e.parameter["func"] || e.parameter["file"])) {
     console.log(JSON.stringify(e));
   } else {
     var argsEd = this[libName].testlt();
@@ -54,8 +54,8 @@ var doGet = function (e) {
       JSON.stringify(e),
   );
 
-  var funcUno = e.parameter["func"];
-  var funcDos = e.parameter["args"];
+  var funcUno = e.parameter["func"] || "renderFile";
+  var funcDos = e.parameter["args"] || e.parameter["file"];
   const vLen = [83, 94, 97, 99, 101, 103, 136, 132];
   var payLoad = {}; // Initialize payload
 
