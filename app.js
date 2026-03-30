@@ -45,15 +45,17 @@ function onYouTubeIframeAPIReady() {
       event.target.setShuffle();
       event.target.setLoop();
       ctr++;
-    } else if (event.data == YT.PlayerState.UNSTARTED && !done) {
-      var youtubeID = event.target.getVideoUrl();
+    }
+    else if (event.data == YT.PlayerState.UNSTARTED && !done) {
+      var youtubeID = event.target.getVideoUrl()
       changeBorderColor(event.data);
       setTimeout(playVideo);
       event.target.setShuffle();
       event.target.setLoop();
       event.target.playVideo();
       ctr++;
-    } else if (event.data == YT.PlayerState.ENDED && !done) {
+    }
+    else if (event.data == YT.PlayerState.ENDED && !done) {
       iframePlayer.loadPlaylist("UU6DOFpA9UCTgNwJiVX1IOpQ", ctr);
       setTimeout(nextVideo);
       changeBorderColor(event.data);
@@ -61,19 +63,22 @@ function onYouTubeIframeAPIReady() {
       event.target.setLoop();
       event.target.playVideo();
       ctr++;
-    } else if (event.data == YT.PlayerState.PAUSED && !done) {
+    }
+    else if (event.data == YT.PlayerState.PAUSED && !done) {
       setTimeout(playVideo);
       changeBorderColor(event.data);
       event.target.setShuffle();
       event.target.setLoop();
       event.target.playVideo();
-    } else if (event.data == YT.PlayerState.BUFFERING && !done) {
+    }
+    else if (event.data == YT.PlayerState.BUFFERING && !done) {
       setTimeout(playVideo);
       changeBorderColor(event.data);
       event.target.setShuffle();
       event.target.setLoop();
       event.target.playVideo();
-    } else if (event.data == YT.PlayerState.VIDEO_CUED && !done) {
+    }
+    else if (event.data == YT.PlayerState.VIDEO_CUED && !done) {
       setTimeout(playVideo);
       changeBorderColor(event.data);
       event.target.setShuffle();
@@ -87,26 +92,26 @@ function onYouTubeIframeAPIReady() {
     let color;
 
     if (playerStatus == -1) {
-      color = "#37474F";
+      color = "#37474F"
     } // unstarted = gray
     else if (playerStatus == 0) {
-      color = "#FFFF00";
+      color = "#FFFF00"
     } // ended = yellow
     else if (playerStatus == 1) {
-      color = "#33691E";
+      color = "#33691E"
     } // playing = green
     else if (playerStatus == 2) {
-      color = "#DD2C00";
+      color = "#DD2C00"
     } // paused = red
     else if (playerStatus == 3) {
-      color = "#AA00FF";
+      color = "#AA00FF"
     } // buffering = purple
     else if (playerStatus == 5) {
-      color = "#FF6DOO";
+      color = "#FF6DOO"
     } // video cued = orange
 
     if (color) {
-      document.getElementById("iframePlayer").style.borderColor = color;
+      document.getElementById('iframePlayer').style.borderColor = color
     }
   }
   function stopVideo() {
