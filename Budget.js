@@ -235,20 +235,21 @@ var doGet = function (e) {
     } else if (payLoad.type === "object") {
       // Here, if payLoad.data is an object, you need to decide how to display it.
       // It could contain sub-properties you want to render.
-      if (payLoad.data.html || payLoad.data.app) {
-        finalAppLContent = payLoad.data.html || payLoad.data.app;
+      let notApp = payLoad.data;
+      if (notApp?.html || notApp?.app) {
+        finalAppLContent = notApp?.html || notApp?.app;
         // If the object itself contains a URL, use it for iframeSrc
-        iframeSrc = payLoad.data.url || iframeSrc;
-      } else if (payLoad.data.url) {
+        iframeSrc = notApp?.url || iframeSrc;
+      } else if (notApp?.url) {
         // If the object explicitly has a 'url' property
-        iframeSrc = payLoad.data.url;
-        finalAppLContent = `URL provided: <a href="${payLoad.data.index}" target="_blank">${payLoad.data.index}</a>`;
-        finalFeedDivContent = `URL provided: <a href="${payLoad.data.link}" target="_blank">${payLoad.data.link}</a>`;
+        iframeSrc = notApp?.url;
+        finalAppLContent = `URL provided: <a href="${notApp?.index}" target="_blank">${notApp?.index}</a>`;
+        finalFeedDivContent = `URL provided: <a href="${notApp?.link}" target="_blank">${notApp?.link}</a>`;
       } else {
         // Default way to display a generic object: stringify it
-        iframeSrc = payLoad.data.index; // Assign iframeSrc
-        finalAppLContent = `<pre>${JSON.stringify(payLoad.data.app, null, 2)}</pre>`;
-        finalFeedDivContent = `URL provided: <a href="${payLoad.data.link}" target="_blank">${payLoad.data.link}</a>`;
+        iframeSrc = notApp?.index; // Assign iframeSrc
+        finalAppLContent = `<pre>${JSON.stringify(notApp?.app || notApp)}</pre>`;
+        finalFeedDivContent = `URL provided: <a href="${notApp?.link}" target="_blank">${notApp?.link}</a>`;
       }
     } else if (payLoad.type === "unknown" || payLoad.type === "error") {
       finalAppLContent = `<div>Error: ${payLoad.message || payLoad.data || "Unknown error."}</div>`;
@@ -385,7 +386,7 @@ var doGet = function (e) {
       </style>
     </head>
     <body>
-      <div id="eObject"><input type="text" id="pageObj" value="" name="eObject" style="display: none"></div>
+      <div id="eObject"><input type="text" id="pageObj" value="<?= e.parameter['args'] ?>" name="eObject" style="display: block"></div>
       <div>
         <?!= renBlob ?>
       </div>
@@ -524,11 +525,11 @@ var doGet = function (e) {
           </head>
           <body>
             <div id="coApp" style='display:"block";background-color: #ffc107;'>
-              <?!= finalAppLContent ?>
+              <?!= finalContent ?>
           </body>
         </html>`,
         {
-          finalAppLContent: finalAppLContent,
+          finalContent: finalAppLContent,
           iframeSrc: iframeSrc,
           finalFeedDivContent: finalFeedDivContent,
           tupL: htmlArray[tres] || args,
