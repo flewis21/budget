@@ -5,18 +5,51 @@
     <title>GitHub Pages with Apps Script</title>
   </head>
   <body>
-    <h1>Data from Apps Script:</h1>
-    <div id="data-display">Loading...</div>
+    <div class="row side-main">
+      <article>
+        <footer>
+          <h1>Data from Apps Script:</h1>
+          <div class="progress-bar" id="data-display">
+            Loading...
+            <div id="myBar" class="progress"></div>
+          </div>
+        </footer>
+      </article>
+    </div>
 
-    <h2>Contact Form</h2>
-    <form id="myForm">
-      <label for="name">Name:</label><br />
-      <input type="text" id="name" name="name" /><br />
-      <label for="email">Email:</label><br />
-      <input type="email" id="email" name="email" /><br /><br />
-      <button type="button" onclick="submitForm()">Submit</button>
-      <div id="form-message"></div>
-    </form>
+    <main>
+      <aside class="socials no-display">
+        <div class="row">
+          <article>
+            <h2>Contact Form</h2>
+            <form id="myForm">
+              <label for="name">Name:</label><br />
+              <input type="text" id="name" name="name" /><br />
+              <label for="email">Email:</label><br />
+              <input type="email" id="email" name="email" /><br /><br />
+              <button type="button" onclick="submitForm()">Submit</button>
+              <div id="form-message"></div>
+            </form>
+          </article>
+        </div>
+      </aside>
+    </main>
+    <div class="row socials">
+      <article>
+        <footer>
+          <p>
+            <iframe
+              src="https://discord.com/widget?id=1477464657722867722&theme=dark"
+              width="350"
+              height="500"
+              allowtransparency="true"
+              frameborder="0"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+            ></iframe>
+          </p>
+        </footer>
+      </article>
+    </div>
 
     <script>
       const scriptURL =
