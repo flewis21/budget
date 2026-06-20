@@ -499,7 +499,7 @@ var doGet = function (e) {
       </script>
     </html>`,
     {
-      renBlob: this[libName].contentApp(
+      renBlob: this[libName].tentApp(
         `
         <!DOCTYPE html>
         <html id="renderTemplate_blob" lang="en">
@@ -949,7 +949,7 @@ var doGetGotRefactored = function (e) {
       </script>
     </html>`,
         {
-          renBlob: this[libName].contentApp(
+          renBlob: this[libName].tentApp(
             `
           <!DOCTYPE html>
           <html id="renderTemplate_blob" lang="en">
