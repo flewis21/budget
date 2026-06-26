@@ -447,15 +447,11 @@ move(); // Call on page load
 
 function serverSide(func, args) {
   return new Promise((resolve, reject) => {
-    google.script.run
-      .withSuccessHandler((result) => {
-        resolve(result);
-      })
-      .withFailureHandler((error) => {
-        console.log(document.getElementById("test").innerHTML);
-        reject(error);
-      })
-      .runBoilerplate(func, args);
+    try {
+      resolve(fetch(scriptURL + "?func=runBoilerplate&args=" + [func, args]));
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 /**
